@@ -3,7 +3,7 @@ function sleepAWhile(ms) {
   }
 $(() => {
 	$(".sy").hide();
-    /* $(".posdiv").hide();
+    $(".posdiv").hide();
     $("#year").on("change", () => {
         let year = $("#year").val();
         if (year === "FY") {
@@ -15,7 +15,7 @@ $(() => {
         } else {
             $(".posdiv").hide();
         }
-    }); */
+    });
 
     $("#submitForm").on("click", (e) => {
         e.preventDefault();
@@ -58,7 +58,7 @@ $(() => {
         }
         $("#submitForm").attr("disabled", true);
         $("#submitForm").attr("value", "Submitting");
-        let urlInit = ``;
+        let urlInit = `https://docs.google.com/forms/d/e/1FAIpQLSdM_OOVXuHm0RwCcxKrZla-xdB_3vs1EttCABS25DqV8_yEmw/viewform?usp=pp_url&entry.1060656156=${name}&entry.1698873613=${email}&entry.1143253914=${mobile}&entry.1156550514=${year}&entry.1553288753=${branch}&entry.1416789219=${positions}&entry.1089965806=${resume_link}&entry.809758529=${cover_link}&entry.887347889=${codechef_link}&entry.903534579=${github_link}&entry.1423818616=${linkedin_link}&entry.2064142506=${q1}`;
         let allData = {
             email,
             name,
@@ -86,7 +86,7 @@ $(() => {
                 if (res.status == 200) {
                     console.log("success");
                     fetch(
-                        "",
+                        "https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
                         {
                             method: "POST",
                             body: JSON.stringify({
