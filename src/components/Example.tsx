@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Stepper, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
 
 interface Props {}
@@ -33,11 +33,9 @@ const Example = (props: Props) => {
           />
         </Tabs>
       </Box>
-      {/* login */}
       <TabPanel value={value} index={0}>
         {"Login :)"}
       </TabPanel>
-      {/* register */}
       <TabPanel value={value} index={1}>
         <Typography sx={{ textAlign: "center" }}>
           {"Login Register same he hai :)"}

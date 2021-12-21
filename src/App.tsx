@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import Example from "./components/Example";
+import Stepper from "./components/Stepper";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         alignItems: "center",
       }}
     >
+      <Stepper />
       <Example />
     </Box>
   );
