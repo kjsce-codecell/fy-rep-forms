@@ -25,9 +25,7 @@ interface Props {}
 
 const FormBox = (props: Props) => {
   const [activeStep, setActiveStep] = React.useState(2);
-  const [formData, setFormData] = React.useState<object | undefined>(
-    undefined
-  );
+  const [formData, setFormData] = React.useState<object | undefined>(undefined);
   const handleChange = (newValue: number) => {
     console.log(newValue);
     setActiveStep(newValue);
@@ -35,7 +33,7 @@ const FormBox = (props: Props) => {
 
   const handleFormData = (newValue: any) => {
     console.log(newValue);
-    setFormData((prev) => ({...prev, newValue}));
+    setFormData((prev) => ({ ...prev, newValue }));
   };
 
   const renderForm = (param: number) => {

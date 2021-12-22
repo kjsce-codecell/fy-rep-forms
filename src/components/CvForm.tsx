@@ -11,7 +11,10 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "35ch" },
+        "& .MuiTextField-root": {
+          m: 1,
+          width: { lg: "35ch", xs: "100%", md: "35ch" },
+        },
       }}
       noValidate
       autoComplete="off"
@@ -36,8 +39,12 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
           helperText="Optional"
         />
       </div>
-      <Button onClick={() => handleChangeCallback(0)}>Prev</Button>
-      <Button onClick={() => handleChangeCallback(2)}>Next</Button>
+      <Box sx={{ float: "right" }}>
+        <Button onClick={() => handleChangeCallback(0)}>Previous</Button>
+        <Button onClick={() => handleChangeCallback(2)} variant="contained">
+          Next
+        </Button>
+      </Box>
     </Box>
   );
 };

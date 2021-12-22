@@ -43,7 +43,6 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
       email: emailRef.current?.value,
       phone: phoneRef.current?.value,
       positions: state,
-
     });
   };
 
@@ -65,7 +64,10 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "35ch" },
+        "& .MuiTextField-root": {
+          m: 1,
+          width: { lg: "35ch", xs: "100%", md: "35ch" },
+        },
       }}
       noValidate
       autoComplete="off"
@@ -93,7 +95,7 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
           <Autocomplete
             // disablePortal
             options={branches}
-            renderInput={(params) => <TextField {...params} label="Branch"/>}
+            renderInput={(params) => <TextField {...params} label="Branch" />}
           />
         </Box>
         <FormControl
@@ -142,7 +144,11 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
           <FormHelperText>At Least 2</FormHelperText>
         </FormControl>
       </div>
-      <Button onClick={handleCallbacks}>Next</Button>
+      <Box sx={{ float: "right" }}>
+        <Button onClick={handleCallbacks} variant="contained">
+          Next
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -43,18 +43,22 @@ const MotivationForm = ({
         }}
       >
         <Box sx={{ m: 2 }}>
-          <Typography style={{ fontSize: 25, textAlign: "center" }}>
+          <Typography style={{ fontSize: 22, textAlign: "center" }}>
             Why do you want to join CodeCell, and why should we choose you?
           </Typography>
-          <Typography style={{ marginTop: 10, textAlign: "center" }}>
+          <Typography style={{ marginTop: 8, textAlign: "center" }}>
             Please note that we regard a well-written letter of motivation very
             highly when reviewing applications.
           </Typography>
         </Box>
         <TextField label="Multiline" multiline minRows={5} />
       </Box>
-      <Button onClick={() => handleChangeCallback(1)}>Prev</Button>
-      <Button onClick={handleSubmit}>Prev</Button>
+      <Box sx={{ float: "right" }}>
+        <Button onClick={() => handleChangeCallback(1)}>Previous</Button>
+        <Button onClick={handleSubmit} variant="contained">
+          Submit
+        </Button>
+      </Box>
     </div>
   );
 };
