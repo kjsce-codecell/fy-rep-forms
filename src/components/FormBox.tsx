@@ -32,7 +32,19 @@ const FormBox = (props: Props) => {
   };
 
   useEffect(() => {
+    const lsData = localStorage.getItem("CodecellApplyFormData");
+    if (lsData) {
+      console.log(lsData);
+      setFormData(JSON.parse(lsData));
+    }
+  }, []);
+
+  useEffect(() => {
     console.log(formData);
+    if (formData !== undefined) {
+      localStorage.setItem("CodecellApplyFormData", JSON.stringify(formData));
+    }
+
     return () => {};
   }, [formData]);
 
@@ -85,7 +97,7 @@ const FormBox = (props: Props) => {
           alt="KJSCE CodeCell"
         />
         <Typography style={{ fontSize: 24, marginBlock: 10 }}>
-          Apply for year 2021-22
+          Application for FY Reps 2021-22
         </Typography>
       </Box>
       <Stack sx={{ width: "100%", mb: 3 }} spacing={4}>

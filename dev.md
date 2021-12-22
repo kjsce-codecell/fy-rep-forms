@@ -19,4 +19,4 @@ git commit -m "!! BREAKING: "
 - logo change
 - welcome to apply (preloader)
 - localstorage
--
+- error text modal
