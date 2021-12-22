@@ -68,13 +68,25 @@ const DetailsForm = ({
   const phoneRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
   
-  var isAlpha = function(ch: any){
-    return /^[A-Z]$/i.test(ch);
+  var isNumber = function(ch: string){
+    for(let i of ch){
+      console.log(i);
+      // if (i.charCodeAt(0) <= 48 && i.charCodeAt(0) >= 57 && i.charCodeAt(0) != 32){
+      //   return false;
+      // }
+      if(isNumber2(i)){
+        return true;
+      }
+
+    }
+    return false;
   }
+
+  function isNumber2(n: any) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); }
 
   const checkAndNext = () => {
     let errorCount = 0;
-    if (nameRef.current!.value.length < 2 || !isAlpha(nameRef.current!.value)) {
+    if (nameRef.current!.value.length < 2 || isNumber(nameRef.current!.value)) {
       setNameError(true);
       console.log("Is this even your name?");
       errorCount++;

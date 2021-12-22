@@ -92,6 +92,12 @@ export default function WelcomeModal() {
           >
             CodeCell Welcomes You
           </Typography>
+          <Typography
+            style={{ fontSize: 15, textAlign: "center" }}
+            gutterBottom
+          >
+            Rome was not built in a day, but this site was ;)
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button
