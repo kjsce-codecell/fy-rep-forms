@@ -83,14 +83,14 @@ const CvForm = ({
       <div>
         <TextField
           error={resumeError ? true : false}
-          label="Resume*"
+          label="Resume *"
           helperText={resumeError ? "Enter a valid link for resume" : ""}
           inputRef={resumeRef}
           defaultValue={formData?.resume}
         />
         <TextField
           error={coverError ? true : false}
-          label="Cover Letter*"
+          label="Cover Letter *"
           helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}
           defaultValue={formData?.cover}
@@ -112,8 +112,10 @@ const CvForm = ({
           inputRef={linkedInRef}
         />
       </div>
-      <Box sx={{ float: "right" }}>
-        <Button onClick={() => handleCallbacks(0)}>Previous</Button>
+      <Box sx={{ float: "right", mt: 3 }}>
+        <Button onClick={() => handleCallbacks(0)} style={{ marginRight: 10 }}>
+          Previous
+        </Button>
         <Button onClick={() => handleCallbacks(1)} variant="contained">
           Save And Next
         </Button>

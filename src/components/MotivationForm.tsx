@@ -133,8 +133,13 @@ const MotivationForm = ({
           defaultValue={formData?.q1}
         />
       </Box>
-      <Box sx={{ float: "right" }}>
-        <Button onClick={() => handleChangeCallback(1)}>Previous</Button>
+      <Box sx={{ float: "right", mt: 3 }}>
+        <Button
+          onClick={() => handleChangeCallback(1)}
+          style={{ marginRight: 10 }}
+        >
+          Previous
+        </Button>
         <Button onClick={handleSubmit} variant="contained">
           Submit
         </Button>
