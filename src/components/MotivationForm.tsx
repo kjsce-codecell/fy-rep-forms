@@ -49,9 +49,7 @@ const MotivationForm = ({
       setMotivationError(true);
       return;
     }
-    setFormDataCallback({ motivation: motivationRef.current?.value });
-    console.log(formData);
-
+    setFormDataCallback({ q1: motivationRef.current?.value });
     setFeedBackText({
       heading: "Wohooo!",
       content:
