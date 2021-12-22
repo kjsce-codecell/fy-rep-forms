@@ -1,3 +1,4 @@
+import { Preview } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -24,7 +25,7 @@ interface Props {}
 
 const FormBox = (props: Props) => {
   const [activeStep, setActiveStep] = React.useState(2);
-  const [formData, setFormData] = React.useState<FormDataType | undefined>(
+  const [formData, setFormData] = React.useState<object | undefined>(
     undefined
   );
   const handleChange = (newValue: number) => {
@@ -34,7 +35,7 @@ const FormBox = (props: Props) => {
 
   const handleFormData = (newValue: any) => {
     console.log(newValue);
-    setFormData(newValue);
+    setFormData((prev) => ({...prev, newValue}));
   };
 
   const renderForm = (param: number) => {

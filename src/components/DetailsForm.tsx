@@ -12,7 +12,7 @@ import {
   withTheme,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
-import React from "react";
+import React, { useRef } from "react";
 import { darkTheme } from "../theme/theme";
 // import {FormContext} from "../context/FormContext";
 
@@ -31,6 +31,21 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
     Coordinator: false,
   });
   const theme = useTheme();
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  const handleCallbacks = () => {
+    handleChangeCallback(1);
+    setFormDataCallback({
+      name: nameRef.current?.value,
+      email: emailRef.current?.value,
+      phone: phoneRef.current?.value,
+      positions: state,
+
+    });
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -56,8 +71,13 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
       autoComplete="off"
     >
       <div>
-        <TextField error={false} label="Name" />
-        <TextField error={false} label="Email" helperText="Incorrect entry." />
+        <TextField error={false} label="Name" inputRef={nameRef} />
+        <TextField
+          error={false}
+          label="Email"
+          helperText="Incorrect entry."
+          inputRef={emailRef}
+        />
       </div>
       <div>
         <Box
@@ -67,11 +87,11 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
             lg: { display: "flex" },
           }}
         >
-          <TextField error={false} label="Mobile Number" />
+          <TextField error={false} label="Mobile Number" inputRef={phoneRef} />
           <Autocomplete
             // disablePortal
             options={branches}
-            renderInput={(params) => <TextField {...params} label="Branch" />}
+            renderInput={(params) => <TextField {...params} label="Branch"/>}
           />
         </Box>
         <FormControl
@@ -131,7 +151,7 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
           <FormHelperText>At Most 3</FormHelperText>
         </FormControl>
       </div>
-      <Button onClick={() => handleChangeCallback(1)}>Next</Button>
+      <Button onClick={handleCallbacks}>Next</Button>
     </Box>
   );
 };
