@@ -1,9 +1,11 @@
-import { TextField, Box } from "@mui/material";
+import { TextField, Box, Button } from "@mui/material";
 import React from "react";
 
-interface Props {}
+interface Props {
+  handleChangeCallback(index: number): void;
+}
 
-const CvForm = (props: Props) => {
+const CvForm = ({ handleChangeCallback }: Props) => {
   return (
     <Box
       component="form"
@@ -33,6 +35,8 @@ const CvForm = (props: Props) => {
           helperText="Optional"
         />
       </div>
+      <Button onClick={() => handleChangeCallback(0)}>Prev</Button>
+      <Button onClick={() => handleChangeCallback(2)}>Next</Button>
     </Box>
   );
 };

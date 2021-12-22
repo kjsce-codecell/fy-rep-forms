@@ -30,27 +30,11 @@ const FormBox = (props: Props) => {
   const renderForm = (param: number) => {
     switch (param) {
       case 0:
-        return (
-          <>
-            <DetailsForm />
-            <Button onClick={() => handleChange(1)}>Next</Button>
-          </>
-        );
+        return <DetailsForm handleChangeCallback={handleChange} />;
       case 1:
-        return (
-          <>
-            <CvForm />
-            <Button onClick={() => handleChange(0)}>Prev</Button>
-            <Button onClick={() => handleChange(2)}>Next</Button>
-          </>
-        );
+        return <CvForm handleChangeCallback={handleChange} />;
       case 2:
-        return (
-          <>
-            <MotivationForm />
-            <Button onClick={() => handleChange(1)}>Prev</Button>
-          </>
-        );
+        return <MotivationForm handleChangeCallback={handleChange} />;
     }
   };
 
