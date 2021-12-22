@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Stack,
   Step,
   StepButton,
@@ -29,11 +30,27 @@ const FormBox = (props: Props) => {
   const renderForm = (param: number) => {
     switch (param) {
       case 0:
-        return <DetailsForm />;
+        return (
+          <>
+            <DetailsForm />
+            <Button onClick={() => handleChange(1)}>Next</Button>
+          </>
+        );
       case 1:
-        return <CvForm />;
+        return (
+          <>
+            <CvForm />
+            <Button onClick={() => handleChange(0)}>Prev</Button>
+            <Button onClick={() => handleChange(2)}>Next</Button>
+          </>
+        );
       case 2:
-        return <MotivationForm />;
+        return (
+          <>
+            <MotivationForm />
+            <Button onClick={() => handleChange(1)}>Prev</Button>
+          </>
+        );
     }
   };
 
@@ -45,7 +62,7 @@ const FormBox = (props: Props) => {
       boxShadow={2}
       padding={4}
     >
-      <Stack sx={{ width: "100%" }} spacing={4}>
+      <Stack sx={{ width: "100%", mb: 3 }} spacing={4}>
         <Stepper
           alternativeLabel
           activeStep={activeStep}
