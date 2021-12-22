@@ -78,7 +78,7 @@ const DetailsForm = ({
       console.log("Is this even your phone?");
       return;
     }
-    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') === 0) {
+    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') === 0 || !emailRef.current!.value.includes(".com")) {
       setEmailError(true);
       console.log("Is this even your email?");
       return;
@@ -165,7 +165,7 @@ const DetailsForm = ({
             error={phoneError ? true : false}
             label="Mobile Number"
             inputRef={phoneRef}
-            helperText={phoneError ? "Enter a valid error" : ""}
+            helperText={phoneError ? "Enter a valid number" : ""}
             defaultValue={formData?.phone}
           />
           <Autocomplete
