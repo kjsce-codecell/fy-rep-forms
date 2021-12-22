@@ -32,8 +32,8 @@ const FormBox = (props: Props) => {
   };
 
   const handleFormData = (newValue: any) => {
-    console.log(newValue);
     setFormData((prev) => ({ ...prev, newValue }));
+    console.log(newValue);
   };
 
   const renderForm = (param: number) => {
