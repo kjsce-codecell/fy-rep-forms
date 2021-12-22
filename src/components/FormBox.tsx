@@ -31,7 +31,7 @@ const FormBox = (props: Props) => {
     setActiveStep(newValue);
   };
 
-  const handleFormData = (newValue: any) => {
+  const handleFormData = (newValue: object) => {
     setFormData((prev) => ({ ...prev, newValue }));
     console.log(newValue);
   };
