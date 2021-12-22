@@ -12,7 +12,7 @@ import {
   withTheme,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState} from "react";
 import { darkTheme } from "../theme/theme";
 // import {FormContext} from "../context/FormContext";
 
@@ -32,9 +32,35 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   });
   const theme = useTheme();
 
+  const [nameError, setNameError] = useState<boolean>(false);
+  const [phoneError, setPhoneError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+
+
+
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
+
+  const checkAndNext = () => {
+    if (nameRef.current!.value.length < 2) {
+      setNameError(true);
+      console.log("Is this even your name?");
+      return;
+    }
+    if (phoneRef.current!.value.length != 10) {
+      setPhoneError(true);
+      console.log("Is this even your phone?");
+      return;
+    }
+    if (!emailRef.current!.value.includes("@")) {
+      setEmailError(true);
+      console.log("Is this even your email?");
+      return;
+    }
+    handleCallbacks();
+  };
+
 
   const handleCallbacks = () => {
     setFormDataCallback({
@@ -73,12 +99,18 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
       autoComplete="off"
     >
       <div>
-        <TextField error={false} label="Name" inputRef={nameRef} />
+        <TextField
+          error={nameError ? true : false}
+          label="Name"
+          inputRef={nameRef}
+          helperText={nameError ? "Enter a valid name" : ""}
+        />
         <TextField
           error={false}
           label="Email"
           helperText="Incorrect entry."
           inputRef={emailRef}
+          required
         />
       </div>
       <div>
@@ -91,7 +123,12 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
             },
           }}
         >
-          <TextField error={false} label="Mobile Number" inputRef={phoneRef} />
+          <TextField
+            error={phoneError ? true : false}
+            label="Mobile Number"
+            inputRef={phoneRef}
+            helperText={phoneError ? "error goes here" : ""}
+          />
           <Autocomplete
             // disablePortal
             options={branches}
@@ -145,7 +182,7 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
         </FormControl>
       </div>
       <Box sx={{ float: "right" }}>
-        <Button onClick={handleCallbacks} variant="contained">
+        <Button onClick={() => checkAndNext()} variant="contained">
           Next
         </Button>
       </Box>
