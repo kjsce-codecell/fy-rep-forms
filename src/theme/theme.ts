@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 
 export const customColors = {
-  outerBg: "linear-gradient(to right, #9d50bb, #6e48aa);",
+  outerBg: "linear-gradient(to right, #000000, #434343);",
   innerBg: "#edebf2",
   stepperColor: " linear-gradient(to right, #6441a5, #2a0845); ",
   stepperLine: "lightgrey",

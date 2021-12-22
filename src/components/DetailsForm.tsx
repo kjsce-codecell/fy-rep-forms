@@ -78,7 +78,7 @@ const DetailsForm = ({
       console.log("Is this even your phone?");
       return;
     }
-    if (!emailRef.current!.value.includes("@")) {
+    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') > 0) {
       setEmailError(true);
       console.log("Is this even your email?");
       return;
@@ -145,7 +145,7 @@ const DetailsForm = ({
         <TextField
           error={emailError ? true : false}
           label="Email"
-          helperText={emailError ? "Incorrect entry" : ""}
+          helperText={emailError ? "Enter a valid email" : ""}
           inputRef={emailRef}
           defaultValue={formData?.email}
           required
