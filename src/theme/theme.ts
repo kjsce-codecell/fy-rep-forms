@@ -1,11 +1,11 @@
 import { createTheme } from "@mui/material";
 
 export const customColors = {
-  outerBg: "#121212",
-  innerBg: "#272727",
+  outerBg: "#fff",
+  innerBg: "#edebf2",
   stepperColor:
-    "linear-gradient(90deg, hsla(210, 29%, 24%, 1) 0%, hsla(204, 64%, 44%, 1) 100%);",
-  stepperLine: "pink",
+    " linear-gradient(to right, #6441a5, #2a0845); ",
+  stepperLine: "purple",
 };
 
 export const darkTheme = createTheme({
@@ -20,7 +20,7 @@ export const darkTheme = createTheme({
       main: "rgb(0,163,0)",
     },
     text: {
-      primary: "#84c9fb",
+      primary: "#6441A5",
       secondary: "#84c9fb",
     },
   },
@@ -33,10 +33,10 @@ export const darkTheme = createTheme({
 export const lightTheme = createTheme({
   palette: {
     primary: {
-      main: "rgb(238,146,12)",
+      main: "#6441A5",
     },
     secondary: {
-      main: "rgb(0,163,0)",
+      main: "#6441A5",
     },
     success: {
       main: "rgb(0,163,0)",

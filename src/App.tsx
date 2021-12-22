@@ -5,7 +5,7 @@ import FormBox from "./components/FormBox";
 import { customColors, darkTheme, lightTheme } from "./theme/theme";
 
 function App() {
-  const [theme, setTheme] = useState(darkTheme);
+  const [theme, setTheme] = useState(lightTheme);
   const formContext = React.useContext(FormContext);
 
   const changeTheme = () => {
