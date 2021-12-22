@@ -62,9 +62,11 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
       <div>
         <Box
           sx={{
-            md: { display: "flex" },
-            sm: { display: "flex" },
-            lg: { display: "flex" },
+            display: {
+              md: "flex",
+              sm: "flex",
+              lg: "flex",
+            },
           }}
         >
           <TextField error={false} label="Mobile Number" />
