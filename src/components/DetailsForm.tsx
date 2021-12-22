@@ -67,10 +67,14 @@ const DetailsForm = ({
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
+  
+  var isAlpha = function(ch: any){
+    return /^[A-Z]$/i.test(ch);
+  }
 
   const checkAndNext = () => {
     let errorCount = 0;
-    if (nameRef.current!.value.length < 2) {
+    if (nameRef.current!.value.length < 2 || !isAlpha(nameRef.current!.value)) {
       setNameError(true);
       console.log("Is this even your name?");
       errorCount++;
@@ -87,7 +91,7 @@ const DetailsForm = ({
     }
     if (!branchRef.current?.value) {
       setBranchError(true);
-      console.log("Is this even your email?");
+      console.log("Is this even your branch?");
       errorCount++;
     }
     if (errorCount === 0) {
