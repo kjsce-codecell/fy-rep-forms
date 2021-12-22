@@ -107,6 +107,7 @@ const MotivationForm = ({
           inputRef={motivationRef}
           error={motivationError ? true : false}
           helperText={motivationError ? "This is a required field" : ""}
+          defaultValue={formData?.q1}
         />
       </Box>
       <Box sx={{ float: "right" }}>

@@ -75,12 +75,14 @@ const CvForm = ({
           label="Resume*"
           helperText={resumeError ? "Enter a valid link for resume" : ""}
           inputRef={resumeRef}
+          defaultValue={formData?.resume}
         />
         <TextField
           error={linkedInError ? true : false}
           label="Cover Letter*"
           helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}
+          defaultValue={formData?.cover}
         />
       </div>
       <div>
@@ -90,6 +92,7 @@ const CvForm = ({
           helperText={
             githubError ? "Enter a valid link for github profile" : ""
           }
+          defaultValue={formData?.github}
           inputRef={githubRef}
         />
         <TextField
@@ -98,13 +101,14 @@ const CvForm = ({
           helperText={
             linkedInError ? "Enter a valid link for LinkedIn Profile" : ""
           }
+          defaultValue={formData?.linkedin}
           inputRef={linkedInRef}
         />
       </div>
       <Box sx={{ float: "right" }}>
         <Button onClick={() => handleCallbacks(0)}>Previous</Button>
         <Button onClick={() => handleCallbacks(1)} variant="contained">
-          Next
+          Save And Next
         </Button>
       </Box>
     </Box>
