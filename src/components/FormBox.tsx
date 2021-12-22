@@ -13,7 +13,7 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { customColors } from "../theme/theme";
 import { FormDataType } from "../types/FormData";
 import CvForm from "./CvForm";
@@ -31,9 +31,13 @@ const FormBox = (props: Props) => {
     setActiveStep(newValue);
   };
 
+  useEffect(() => {
+    console.log(formData);
+    return () => {};
+  }, [formData]);
+
   const handleFormData = (newValue: any) => {
-    setFormData((prev) => ({ ...prev, newValue }));
-    console.log(newValue);
+    setFormData((prev) => ({ ...prev, ...newValue }));
   };
 
   const renderForm = (param: number) => {
