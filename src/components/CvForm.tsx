@@ -23,9 +23,18 @@ const CvForm = ({
   const [linkedInError, setLinkedInError] = useState<boolean>(false);
   const [githubError, setGithubError] = useState<boolean>(false);
 
+  const updateCallback = () => {
+    setFormDataCallback({
+      resume: resumeRef.current?.value,
+      cover: coverRef.current?.value,
+      linkedin: linkedInRef.current?.value,
+      github: githubRef.current?.value,
+    });
+  };
   const handleCallbacks = (jump: number) => {
     if (jump == 0) {
       handleChangeCallback(0);
+      updateCallback();
       return;
     }
 
@@ -49,13 +58,7 @@ const CvForm = ({
       console.log("Enter a valid link for github");
       return;
     }
-
-    setFormDataCallback({
-      resume: resumeRef.current?.value,
-      cover: coverRef.current?.value,
-      linkedin: linkedInRef.current?.value,
-      github: githubRef.current?.value,
-    });
+    updateCallback();
     handleChangeCallback(2);
   };
 

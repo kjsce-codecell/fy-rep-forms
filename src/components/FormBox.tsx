@@ -16,6 +16,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { customColors } from "../theme/theme";
 import { FormDataType } from "../types/FormData";
+import { calculateDataLength } from "../utils/calculateDataLength";
 import CvForm from "./CvForm";
 import DetailsForm from "./DetailsForm";
 import MotivationForm from "./MotivationForm";
@@ -24,7 +25,7 @@ import { ColorlibConnector, ColorlibStepIcon, steps } from "./StepperUtils";
 interface Props {}
 
 const FormBox = (props: Props) => {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState<number | undefined>();
   const [formData, setFormData] = React.useState<object | undefined>(undefined);
   const handleChange = (newValue: number) => {
     console.log(newValue);
@@ -36,6 +37,16 @@ const FormBox = (props: Props) => {
     if (lsData) {
       console.log(lsData);
       setFormData(JSON.parse(lsData));
+      const dataLength = calculateDataLength(JSON.parse(lsData));
+      if (dataLength < 5) {
+        setActiveStep(0);
+      } else if (dataLength >= 5 && dataLength < 7) {
+        setActiveStep(1);
+      } else if (dataLength >= 7) {
+        setActiveStep(2);
+      }
+    } else {
+      setActiveStep(0);
     }
   }, []);
 
@@ -117,7 +128,7 @@ const FormBox = (props: Props) => {
           ))}
         </Stepper>
       </Stack>
-      {renderForm(activeStep)}
+      {activeStep !== undefined ? renderForm(activeStep) : <></>}
     </Box>
   );
 };
