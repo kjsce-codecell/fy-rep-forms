@@ -78,7 +78,7 @@ const CvForm = ({
           defaultValue={formData?.resume}
         />
         <TextField
-          error={linkedInError ? true : false}
+          error={coverError ? true : false}
           label="Cover Letter*"
           helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}

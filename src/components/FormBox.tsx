@@ -80,8 +80,8 @@ const FormBox = (props: Props) => {
     >
       <Box sx={{ mb: 2, textAlign: "center" }}>
         <img
-          src="/assets/logos/codecell-logo.png"
-          height={50}
+          src="/assets/logos/cropbgpurple.png"
+          height={75}
           alt="KJSCE CodeCell"
         />
         <Typography style={{ fontSize: 24, marginBlock: 10 }}>

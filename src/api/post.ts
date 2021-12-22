@@ -6,10 +6,12 @@ export const POST = async (object?: Object) => {
     "Content-Type": "application/json",
   };
 
-  return fetch(" https://cors-fix.nishit.workers.dev/?" + url, {
-    method: "post",
+  return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
+    method: "POST",
   }).then((res) => {
+    console.log(res);
     if (res.status == 200) {
+      
       return fetch(url, {
         method: "POST",
         headers: headers,

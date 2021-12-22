@@ -143,9 +143,9 @@ const DetailsForm = ({
           defaultValue={formData?.name}
         />
         <TextField
-          error={false}
+          error={emailError ? true : false}
           label="Email"
-          helperText="Incorrect entry."
+          helperText={emailError ? "Incorrect entry" : ""}
           inputRef={emailRef}
           defaultValue={formData?.email}
           required
@@ -165,7 +165,7 @@ const DetailsForm = ({
             error={phoneError ? true : false}
             label="Mobile Number"
             inputRef={phoneRef}
-            helperText={phoneError ? "error goes here" : ""}
+            helperText={phoneError ? "Enter a valid error" : ""}
             defaultValue={formData?.phone}
           />
           <Autocomplete
