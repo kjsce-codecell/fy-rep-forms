@@ -10,7 +10,7 @@ import {
   DialogTitle,
   colors,
 } from "@mui/material";
-import React, { useContext, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { POST } from "../api/post";
 import { FormDataType } from "../types/FormData";
 // @ts-ignore
@@ -48,37 +48,40 @@ const MotivationForm = ({
   };
 
   const handleSubmit = () => {
-    if (motivationRef.current!.value.length === 0) {
+    if (motivationRef.current!.value.length < 100) {
       setMotivationError(true);
       return;
     }
 
     // test
-    setFormDataCallback({ q1: motivationRef.current?.value });
-    setSuccess(true);
-    setFeedBackText({
-      heading: "Error hua kuch to",
-      content: "An application has already been submitted for this email",
-    });
-    handleOpenModal();
+
     // end test
 
     if (!formData) return;
     POST({ ...formData }).then((res) => {
       if (res === "Yayay") {
-        console.info(
-          "Registered Sucessfully",
-          "Your application has been submitted",
-          "success"
-        );
+        setFormDataCallback({ q1: motivationRef.current?.value });
+        setSuccess(true);
+        setFeedBackText({
+          heading: "Registered Sucessfully",
+          content: "Your application has been submitted",
+        });
+        handleOpenModal();
       } else if (res === "Email already exists.") {
-        console.info(
-          "Failed to submit",
-          "An application has already been submitted for this email",
-          "error"
-        );
+        setFormDataCallback({ q1: motivationRef.current?.value });
+        setSuccess(false);
+        setFeedBackText({
+          heading: "Failed to submit",
+          content: "An application has already been submitted for this email",
+        });
+        handleOpenModal();
       } else {
-        console.info("Failed to submit", "Something went wrong", "error");
+        setFormDataCallback({ q1: motivationRef.current?.value });
+        setSuccess(false);
+        setFeedBackText({
+          heading: "Failed to submit",
+          content: "Something went wrong",
+        });
       }
     });
   };
@@ -129,12 +132,17 @@ const MotivationForm = ({
           minRows={5}
           inputRef={motivationRef}
           error={motivationError ? true : false}
-          helperText={motivationError ? "This is a required field" : ""}
+          helperText={motivationError ? "Minimum 100 characters required" : ""}
           defaultValue={formData?.q1}
         />
       </Box>
-      <Box sx={{ float: "right" }}>
-        <Button onClick={() => handleChangeCallback(1)}>Previous</Button>
+      <Box sx={{ float: "right", mt: 3 }}>
+        <Button
+          onClick={() => handleChangeCallback(1)}
+          style={{ marginRight: 10 }}
+        >
+          Previous
+        </Button>
         <Button onClick={handleSubmit} variant="contained">
           Submit
         </Button>

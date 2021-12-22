@@ -84,14 +84,16 @@ const DetailsForm = ({
       console.log("Is this even your phone?");
       errorCount++;
     }
-    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') === 0 || !emailRef.current!.value.includes(".com")) {
+    if (
+      !emailRef.current!.value.includes("@") ||
+      emailRef.current!.value.indexOf("@") === 0 ||
+      !emailRef.current!.value.includes(".com")
+    ) {
       setEmailError(true);
       console.log("Is this even your email?");
       errorCount++;
     }
-    if (!branchRef.current?.value) {
-      setBranchError(true);
-      console.log("Is this even your branch?");
+    if (positionPrefError()) {
       errorCount++;
     }
     if (errorCount === 0) {
@@ -130,10 +132,15 @@ const DetailsForm = ({
 
   const { Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam } =
     state;
-  const error =
-    [Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam].filter(
-      (v) => v
-    ).length < 2;
+
+  const positionPrefError = () => {
+    return (
+      [Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam].filter(
+        (v) => v
+      ).length < 2
+    );
+  };
+  const error = positionPrefError();
 
   return (
     <Box
