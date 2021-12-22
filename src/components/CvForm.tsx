@@ -83,14 +83,14 @@ const CvForm = ({
       <div>
         <TextField
           error={resumeError ? true : false}
-          label="Resume*"
+          label="Resume *"
           helperText={resumeError ? "Enter a valid link for resume" : ""}
           inputRef={resumeRef}
           defaultValue={formData?.resume}
         />
         <TextField
           error={coverError ? true : false}
-          label="Cover Letter*"
+          label="Cover Letter *"
           helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}
           defaultValue={formData?.cover}
