@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-interface FormContextType {
+export interface FormContextType {
   email: string;
   name: string;
   phone: string;

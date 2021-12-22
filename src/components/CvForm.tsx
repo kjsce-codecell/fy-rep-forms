@@ -3,9 +3,10 @@ import React from "react";
 
 interface Props {
   handleChangeCallback(index: number): void;
+  setFormDataCallback(object: any): void;
 }
 
-const CvForm = ({ handleChangeCallback }: Props) => {
+const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   return (
     <Box
       component="form"

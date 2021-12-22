@@ -14,6 +14,7 @@ import {
 import { useTheme } from "@mui/system";
 import React from "react";
 import { darkTheme } from "../theme/theme";
+// import {FormContext} from "../context/FormContext";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -54,7 +55,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
       autoComplete="off"
     >
       <div>
-        <TextField error={false} label="Name" />
+        <TextField error={false} label="Name"/>
         <TextField error={false} label="Email" helperText="Incorrect entry." />
       </div>
       <div>
