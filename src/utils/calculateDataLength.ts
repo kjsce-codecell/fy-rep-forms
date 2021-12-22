@@ -7,6 +7,8 @@ export const calculateDataLength = (lsData: FormDataType) => {
     const len = lsData[key]?.toString().length;
     if (len && len > 0) {
       count++;
+    } else {
+      break;
     }
   }
   return count;
