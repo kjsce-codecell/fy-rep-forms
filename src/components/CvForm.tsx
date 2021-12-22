@@ -1,16 +1,22 @@
 import { TextField, Box, Button } from "@mui/material";
 import React, { useRef, useState } from "react";
+import { FormDataType } from "../types/FormData";
 
 interface Props {
   handleChangeCallback(index: number): void;
   setFormDataCallback(object: any): void;
+  formData: FormDataType | undefined;
 }
 
-const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
+const CvForm = ({
+  handleChangeCallback,
+  setFormDataCallback,
+  formData,
+}: Props) => {
   const resumeRef = useRef<HTMLInputElement>(null);
   const coverRef = useRef<HTMLInputElement>(null);
   const linkedInRef = useRef<HTMLInputElement>(null);
-  const githubRef = useRef<HTMLInputElement>(null); 
+  const githubRef = useRef<HTMLInputElement>(null);
 
   const [resumeError, setResumeError] = useState<boolean>(false);
   const [coverError, setCoverError] = useState<boolean>(false);
@@ -18,22 +24,22 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   const [githubError, setGithubError] = useState<boolean>(false);
 
   const handleCallbacks = (jump: number) => {
-    if(!resumeRef.current!.value.includes('https://')){
+    if (!resumeRef.current!.value.includes("https://")) {
       setResumeError(true);
       console.log("Enter a valid link for resume");
       return;
     }
-    if(!coverRef.current!.value.includes('https://')){
+    if (!coverRef.current!.value.includes("https://")) {
       setCoverError(true);
       console.log("Enter a valid link for cover");
       return;
     }
-    if(!linkedInRef.current!.value.includes('https://')){
+    if (!linkedInRef.current!.value.includes("https://")) {
       setLinkedInError(true);
       console.log("Enter a valid link for linkedIn profile");
       return;
     }
-    if(!githubRef.current!.value.includes('https://')){
+    if (!githubRef.current!.value.includes("https://")) {
       setGithubError(true);
       console.log("Enter a valid link for github");
       return;
@@ -81,13 +87,17 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
         <TextField
           error={githubError ? true : false}
           label="GitHub Profile"
-          helperText={githubError ? "Enter a valid link for github profile" : ""}
+          helperText={
+            githubError ? "Enter a valid link for github profile" : ""
+          }
           inputRef={githubRef}
         />
         <TextField
           error={linkedInError ? true : false}
           label="LinkedIn Profile"
-          helperText={linkedInError ? "Enter a valid link for LinkedIn Profile" : ""}
+          helperText={
+            linkedInError ? "Enter a valid link for LinkedIn Profile" : ""
+          }
           inputRef={linkedInRef}
         />
       </div>

@@ -12,35 +12,60 @@ import {
   withTheme,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
-import React, { useRef, useEffect, useState} from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { darkTheme } from "../theme/theme";
+import { FormDataType } from "../types/FormData";
 // import {FormContext} from "../context/FormContext";
 
 interface Props {
   handleChangeCallback(index: number): void;
   setFormDataCallback(object: any): void;
+  formData: FormDataType | undefined;
 }
 
 const branches = ["COMPS", "IT", "Electronics", "EXTC", "MECH"];
 
-const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
-  const [state, setState] = React.useState({
-    TechnicalTeam: false,
-    PublicRelationsTeam: false,
-    CreativeTeam: false,
-    Coordinator: false,
-  });
+const DetailsForm = ({
+  handleChangeCallback,
+  setFormDataCallback,
+  formData,
+}: Props) => {
+  const getState = () => {
+    if (formData?.positions && formData?.positions?.length > 0)
+      return {
+        TechnicalTeam: formData?.positions?.includes("TechnicalTeam")
+          ? true
+          : false,
+        PublicRelationsTeam: formData?.positions?.includes("TechnicalTeam")
+          ? true
+          : false,
+        CreativeTeam: formData?.positions?.includes("CreativeTeam")
+          ? true
+          : false,
+        Coordinator: formData?.positions?.includes("Coordinator")
+          ? true
+          : false,
+      };
+    else {
+      return {
+        TechnicalTeam: false,
+        PublicRelationsTeam: false,
+        CreativeTeam: false,
+        Coordinator: false,
+      };
+    }
+  };
+  const [state, setState] = React.useState(getState());
   const theme = useTheme();
 
   const [nameError, setNameError] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
 
-
-
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
+  const branchRef = useRef<HTMLInputElement>(null);
 
   const checkAndNext = () => {
     if (nameRef.current!.value.length < 2) {
@@ -61,13 +86,24 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
     handleCallbacks();
   };
 
+  const positionStateToArray = () => {
+    const arr = new Array();
+    for (var key in state) {
+      if (state.hasOwnProperty(key)) {
+        // @ts-ignore
+        if (state[key] == true) arr.push(key);
+      }
+    }
+    return arr;
+  };
 
   const handleCallbacks = () => {
     setFormDataCallback({
       name: nameRef.current?.value,
       email: emailRef.current?.value,
       phone: phoneRef.current?.value,
-      positions: state,
+      branch: branchRef.current?.value,
+      positions: positionStateToArray(),
     });
     handleChangeCallback(1);
   };
@@ -104,12 +140,14 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
           label="Name"
           inputRef={nameRef}
           helperText={nameError ? "Enter a valid name" : ""}
+          defaultValue={formData?.name}
         />
         <TextField
           error={false}
           label="Email"
           helperText="Incorrect entry."
           inputRef={emailRef}
+          defaultValue={formData?.email}
           required
         />
       </div>
@@ -128,11 +166,15 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
             label="Mobile Number"
             inputRef={phoneRef}
             helperText={phoneError ? "error goes here" : ""}
+            defaultValue={formData?.phone}
           />
           <Autocomplete
             // disablePortal
             options={branches}
-            renderInput={(params) => <TextField {...params} label="Branch" />}
+            defaultValue={formData?.branch}
+            renderInput={(params) => (
+              <TextField {...params} inputRef={branchRef} label="Branch" />
+            )}
           />
         </Box>
         <FormControl
@@ -183,7 +225,7 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
       </div>
       <Box sx={{ float: "right" }}>
         <Button onClick={() => checkAndNext()} variant="contained">
-          Next
+          Save and Next
         </Button>
       </Box>
     </Box>

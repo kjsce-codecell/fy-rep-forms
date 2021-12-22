@@ -47,6 +47,7 @@ const FormBox = (props: Props) => {
           <DetailsForm
             handleChangeCallback={handleChange}
             setFormDataCallback={handleFormData}
+            formData={formData}
           />
         );
       case 1:
@@ -54,6 +55,7 @@ const FormBox = (props: Props) => {
           <CvForm
             handleChangeCallback={handleChange}
             setFormDataCallback={handleFormData}
+            formData={formData}
           />
         );
       case 2:
