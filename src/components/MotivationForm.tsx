@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  colors,
 } from "@mui/material";
 import React, { useContext, useState, useRef } from "react";
 import { POST } from "../api/post";
@@ -115,9 +116,10 @@ const MotivationForm = ({
               textAlign: "center",
               display: "flex",
               alignItems: "center",
+              color: colors.cyan[900],
             }}
           >
-            <InfoIcon />
+            <InfoIcon style={{ fontSize: 24, margin: 5 }} />
             We regard a well-written letter of motivation very highly when
             reviewing applications.
           </Typography>
