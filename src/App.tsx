@@ -38,7 +38,8 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: customColors.outerBg,
+          background: "url('/assets/apply-codecell.png')",
+          backgroundSize: "cover",
         }}
       >
         {showWelcome === true && <WelcomeModal />}

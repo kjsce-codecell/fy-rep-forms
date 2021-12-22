@@ -53,10 +53,10 @@ const MotivationForm = ({
 
     // test
     setFormDataCallback({ q1: motivationRef.current?.value });
-    setSuccess(false);
+    setSuccess(true);
     setFeedBackText({
-      heading: "Whoops!",
-      content: "Error hua kuch to :(",
+      heading: "Error hua kuch to",
+      content: "An application has already been submitted for this email",
     });
     handleOpenModal();
     // end test

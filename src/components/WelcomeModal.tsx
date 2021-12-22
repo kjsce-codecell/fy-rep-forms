@@ -90,11 +90,15 @@ export default function WelcomeModal() {
             style={{ fontSize: 30, textAlign: "center" }}
             gutterBottom
           >
-            Some text
+            CodeCell Welcomes You
           </Typography>
         </DialogContent>
         <DialogActions>
-          <Button style={{ width: "100%" }} onClick={handleClose}>
+          <Button
+            style={{ width: "100%" }}
+            variant="contained"
+            onClick={handleClose}
+          >
             Lets Go
           </Button>
         </DialogActions>
