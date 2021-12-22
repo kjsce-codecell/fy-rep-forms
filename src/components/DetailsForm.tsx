@@ -55,11 +55,16 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
         <TextField error={false} label="Email" helperText="Incorrect entry." />
       </div>
       <div>
-        <Box sx={{ display: "flex" }}>
+        <Box
+          sx={{
+            md: { display: "flex" },
+            sm: { display: "flex" },
+            lg: { display: "flex" },
+          }}
+        >
           <TextField error={false} label="Mobile Number" />
           <Autocomplete
-            disablePortal
-            id="combo-box-demo"
+            // disablePortal
             options={branches}
             renderInput={(params) => <TextField {...params} label="Branch" />}
           />
