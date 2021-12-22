@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, ThemeProvider } from "@mui/material";
 import FormBox from "./components/FormBox";
 import { customColors, darkTheme, lightTheme } from "./theme/theme";
+import WelcomeModal from "./components/WelcomeModal";
 
 function App() {
   const [theme, setTheme] = useState(lightTheme);
+  const [showWelcome, setShowWelcome] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    const check = localStorage.getItem("CodecellApplyWelcomeModal");
+    if (check && check === "true") {
+      setShowWelcome(false);
+    } else {
+      setShowWelcome(true);
+    }
+    return () => {};
+  }, []);
 
   const changeTheme = () => {
     if (theme == darkTheme) {
@@ -29,6 +41,7 @@ function App() {
           background: customColors.outerBg,
         }}
       >
+        {showWelcome === true && <WelcomeModal />}
         <FormBox />
       </Box>
     </ThemeProvider>
