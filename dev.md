@@ -14,7 +14,9 @@ git commit -m "!! BREAKING: "
 
 ## TODO:
 
-- bg update
-- logo color
-- small screen bg
-- react confetti
+- prev btn
+- bg
+- logo change
+- welcome to apply (preloader)
+- localstorage
+- error text modal
