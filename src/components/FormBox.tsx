@@ -41,7 +41,7 @@ const FormBox = (props: Props) => {
 
   useEffect(() => {
     console.log(formData);
-    if (formData !== undefined) {
+    if (formData != undefined) {
       localStorage.setItem("CodecellApplyFormData", JSON.stringify(formData));
     }
 

@@ -39,16 +39,16 @@ const CvForm = ({
       console.log("Enter a valid link for cover");
       return;
     }
-    if (!linkedInRef.current!.value.includes("https://")) {
-      setLinkedInError(true);
-      console.log("Enter a valid link for linkedIn profile");
-      return;
-    }
-    if (!githubRef.current!.value.includes("https://")) {
-      setGithubError(true);
-      console.log("Enter a valid link for github");
-      return;
-    }
+    // if (!linkedInRef.current!.value.includes("https://")) {
+    //   setLinkedInError(true);
+    //   console.log("Enter a valid link for linkedIn profile");
+    //   return;
+    // }
+    // if (!githubRef.current!.value.includes("https://")) {
+    //   setGithubError(true);
+    //   console.log("Enter a valid link for github");
+    //   return;
+    // }
 
     setFormDataCallback({
       resume: resumeRef.current?.value,
@@ -89,20 +89,16 @@ const CvForm = ({
       </div>
       <div>
         <TextField
-          error={githubError ? true : false}
+          error={false}
           label="GitHub Profile"
-          helperText={
-            githubError ? "Enter a valid link for github profile" : ""
-          }
+          helperText={""}
           defaultValue={formData?.github}
           inputRef={githubRef}
         />
         <TextField
-          error={linkedInError ? true : false}
+          error={false}
           label="LinkedIn Profile"
-          helperText={
-            linkedInError ? "Enter a valid link for LinkedIn Profile" : ""
-          }
+          helperText={""}
           defaultValue={formData?.linkedin}
           inputRef={linkedInRef}
         />
