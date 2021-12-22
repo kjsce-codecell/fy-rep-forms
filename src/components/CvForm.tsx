@@ -24,6 +24,11 @@ const CvForm = ({
   const [githubError, setGithubError] = useState<boolean>(false);
 
   const handleCallbacks = (jump: number) => {
+    if (jump == 0) {
+      handleChangeCallback(0);
+      return;
+    }
+
     if (!resumeRef.current!.value.includes("https://")) {
       setResumeError(true);
       console.log("Enter a valid link for resume");
@@ -44,10 +49,7 @@ const CvForm = ({
       console.log("Enter a valid link for github");
       return;
     }
-    if (jump == 0) {
-      handleChangeCallback(0);
-      return;
-    }
+
     setFormDataCallback({
       resume: resumeRef.current?.value,
       cover: coverRef.current?.value,
