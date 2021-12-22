@@ -1,5 +1,5 @@
 import { TextField, Box, Button } from "@mui/material";
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -7,26 +7,24 @@ interface Props {
 }
 
 const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
-
   const resumeRef = useRef<HTMLInputElement>(null);
   const coverRef = useRef<HTMLInputElement>(null);
   const linkedInRef = useRef<HTMLInputElement>(null);
   const githubRef = useRef<HTMLInputElement>(null);
 
- 
   const handleCallbacks = (jump: number) => {
-    if (jump == 0){
+    if (jump == 0) {
       handleChangeCallback(0);
+      return;
     }
-    handleChangeCallback(1);
     setFormDataCallback({
       resume: resumeRef.current?.value,
       cover: coverRef.current?.value,
       linkedin: linkedInRef.current?.value,
       github: githubRef.current?.value,
     });
-
-  }
+    handleChangeCallback(2);
+  };
 
   return (
     <Box
@@ -55,7 +53,12 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
         />
       </div>
       <div>
-        <TextField error={false} label="GitHub Profile" helperText="Optional" inputRef={githubRef}/>
+        <TextField
+          error={false}
+          label="GitHub Profile"
+          helperText="Optional"
+          inputRef={githubRef}
+        />
         <TextField
           error={false}
           label="LinkedIn Profile"

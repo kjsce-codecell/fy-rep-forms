@@ -37,13 +37,13 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   const phoneRef = useRef<HTMLInputElement>(null);
 
   const handleCallbacks = () => {
-    handleChangeCallback(1);
     setFormDataCallback({
       name: nameRef.current?.value,
       email: emailRef.current?.value,
       phone: phoneRef.current?.value,
       positions: state,
     });
+    handleChangeCallback(1);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
