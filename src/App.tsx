@@ -17,7 +17,7 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={theme}>
       <FormContext.Provider value={formContext}>
         <Box
           sx={{
