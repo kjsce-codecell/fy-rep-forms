@@ -1,5 +1,5 @@
 import { TextField, Box, Button } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -10,9 +10,34 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   const resumeRef = useRef<HTMLInputElement>(null);
   const coverRef = useRef<HTMLInputElement>(null);
   const linkedInRef = useRef<HTMLInputElement>(null);
-  const githubRef = useRef<HTMLInputElement>(null);
+  const githubRef = useRef<HTMLInputElement>(null); 
+
+  const [resumeError, setResumeError] = useState<boolean>(false);
+  const [coverError, setCoverError] = useState<boolean>(false);
+  const [linkedInError, setLinkedInError] = useState<boolean>(false);
+  const [githubError, setGithubError] = useState<boolean>(false);
 
   const handleCallbacks = (jump: number) => {
+    if(!resumeRef.current!.value.includes('https://')){
+      setResumeError(true);
+      console.log("Enter a valid link for resume");
+      return;
+    }
+    if(!coverRef.current!.value.includes('https://')){
+      setCoverError(true);
+      console.log("Enter a valid link for cover");
+      return;
+    }
+    if(!linkedInRef.current!.value.includes('https://')){
+      setLinkedInError(true);
+      console.log("Enter a valid link for linkedIn profile");
+      return;
+    }
+    if(!githubRef.current!.value.includes('https://')){
+      setGithubError(true);
+      console.log("Enter a valid link for github");
+      return;
+    }
     if (jump == 0) {
       handleChangeCallback(0);
       return;
@@ -40,29 +65,29 @@ const CvForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
     >
       <div>
         <TextField
-          error={false}
+          error={resumeError ? true : false}
           label="Resume*"
-          helperText="Google Drive - Public link"
+          helperText={resumeError ? "Enter a valid link for resume" : ""}
           inputRef={resumeRef}
         />
         <TextField
-          error={false}
+          error={linkedInError ? true : false}
           label="Cover Letter*"
-          helperText="Google Drive - Public link"
+          helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}
         />
       </div>
       <div>
         <TextField
-          error={false}
+          error={githubError ? true : false}
           label="GitHub Profile"
-          helperText="Optional"
+          helperText={githubError ? "Enter a valid link for github profile" : ""}
           inputRef={githubRef}
         />
         <TextField
-          error={false}
+          error={linkedInError ? true : false}
           label="LinkedIn Profile"
-          helperText="Optional"
+          helperText={linkedInError ? "Enter a valid link for LinkedIn Profile" : ""}
           inputRef={linkedInRef}
         />
       </div>
