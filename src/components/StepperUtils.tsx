@@ -8,11 +8,11 @@ import {
   Step,
   StepLabel,
 } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import VideoLabelIcon from "@mui/icons-material/VideoLabel";
+import PersonIcon from "@mui/icons-material/Person";
+import WhatsHotIcon from "@mui/icons-material/Whatshot";
+import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
 
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+export const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 22,
   },
@@ -36,7 +36,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-const ColorlibStepIconRoot = styled("div")<{
+export const ColorlibStepIconRoot = styled("div")<{
   ownerState: { completed?: boolean; active?: boolean };
 }>(({ theme, ownerState }) => ({
   backgroundColor: "#ccc",
@@ -59,13 +59,13 @@ const ColorlibStepIconRoot = styled("div")<{
   }),
 }));
 
-function ColorlibStepIcon(props: StepIconProps) {
+export function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed, className } = props;
 
   const icons: { [index: string]: React.ReactElement } = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1: <PersonIcon />,
+    2: <WhatsHotIcon />,
+    3: <FilterTiltShiftIcon />,
   };
 
   return (
@@ -78,26 +78,4 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-];
-
-export default function CustomizedSteppers() {
-  return (
-    <Stack sx={{ width: "100%" }} spacing={4}>
-      <Stepper
-        alternativeLabel
-        activeStep={1}
-        connector={<ColorlibConnector />}
-      >
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Stack>
-  );
-}
+export const steps = ["About You", "Flex Here", "Prove Your Drive"];

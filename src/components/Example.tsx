@@ -1,13 +1,40 @@
-import { Box, Stepper, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Step,
+  StepButton,
+  StepContent,
+  StepLabel,
+  Stepper,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
+import CvForm from "./CvForm";
+import DetailsForm from "./DetailsForm";
+import MotivationForm from "./MotivationForm";
+import { ColorlibConnector, ColorlibStepIcon, steps } from "./StepperUtils";
 
 interface Props {}
 
 const Example = (props: Props) => {
-  const [value, setValue] = useState(0);
+  const [activeStep, setActiveStep] = React.useState(2);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (newValue: number) => {
+    console.log(newValue);
+    setActiveStep(newValue);
+  };
+
+  const renderForm = (param: number) => {
+    switch (param) {
+      case 0:
+        return <DetailsForm />;
+      case 1:
+        return <CvForm />;
+      case 2:
+        return <MotivationForm />;
+    }
   };
 
   return (
@@ -16,65 +43,28 @@ const Example = (props: Props) => {
       alignItems={"center"}
       flexDirection={"column"}
       boxShadow={2}
-      margin={3}
+      padding={4}
     >
-      <Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          aria-label="basic tabs example"
+      <Stack sx={{ width: "100%" }} spacing={4}>
+        <Stepper
+          alternativeLabel
+          activeStep={activeStep}
+          connector={<ColorlibConnector />}
         >
-          <Tab sx={{ px: { lg: 20, xs: 6 } }} label="Login" {...a11yProps(0)} />
-          <Tab
-            sx={{ px: { lg: 16, xs: 6 } }}
-            label="Register"
-            {...a11yProps(1)}
-          />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        {"Login :)"}
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <Typography sx={{ textAlign: "center" }}>
-          {"Login Register same he hai :)"}
-        </Typography>
-      </TabPanel>
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepButton onClick={() => handleChange(index)}>
+                <StepLabel StepIconComponent={ColorlibStepIcon}>
+                  {label}
+                </StepLabel>
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
+      </Stack>
+      {renderForm(activeStep)}
     </Box>
   );
 };
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <>{children}</>
-        </Box>
-      )}
-    </div>
-  );
-}
 
 export default Example;
