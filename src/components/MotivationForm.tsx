@@ -1,17 +1,22 @@
 import { Button, TextField, Box, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { POST } from "../api/post";
-import FormContext from "../context/FormContext";
+import { FormDataType } from "../types/FormData";
 
 interface Props {
   handleChangeCallback(index: number): void;
+  setFormDataCallback(object: any): void;
+  formData: FormDataType | undefined;
 }
 
-const MotivationForm = ({ handleChangeCallback }: Props) => {
-  const formData = useContext(FormContext);
-
+const MotivationForm = ({
+  handleChangeCallback,
+  setFormDataCallback,
+  formData,
+}: Props) => {
   const handleSubmit = () => {
-    POST({ email: formData?.email, ...formData }).then((res) => {
+    if (!formData) return;
+    POST({ ...formData }).then((res) => {
       if (res === "Yayay") {
         console.info(
           "Registered Sucessfully",

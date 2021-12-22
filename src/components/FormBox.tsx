@@ -13,20 +13,20 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { FormContextType } from "../context/FormContext";
 import { customColors } from "../theme/theme";
+import { FormDataType } from "../types/FormData";
 import CvForm from "./CvForm";
 import DetailsForm from "./DetailsForm";
 import MotivationForm from "./MotivationForm";
 import { ColorlibConnector, ColorlibStepIcon, steps } from "./StepperUtils";
 
-interface Props {
-
-}
+interface Props {}
 
 const FormBox = (props: Props) => {
   const [activeStep, setActiveStep] = React.useState(2);
-  const [formData, setFormData] = React.useState<FormContextType | undefined>(undefined);
+  const [formData, setFormData] = React.useState<FormDataType | undefined>(
+    undefined
+  );
   const handleChange = (newValue: number) => {
     console.log(newValue);
     setActiveStep(newValue);
@@ -40,11 +40,27 @@ const FormBox = (props: Props) => {
   const renderForm = (param: number) => {
     switch (param) {
       case 0:
-        return <DetailsForm handleChangeCallback={handleChange} />;
+        return (
+          <DetailsForm
+            handleChangeCallback={handleChange}
+            setFormDataCallback={handleFormData}
+          />
+        );
       case 1:
-        return <CvForm handleChangeCallback={handleChange} setFormDataCallback={handleFormData}/>;
+        return (
+          <CvForm
+            handleChangeCallback={handleChange}
+            setFormDataCallback={handleFormData}
+          />
+        );
       case 2:
-        return <MotivationForm handleChangeCallback={handleChange} />;
+        return (
+          <MotivationForm
+            handleChangeCallback={handleChange}
+            setFormDataCallback={handleFormData}
+            formData={formData}
+          />
+        );
     }
   };
 

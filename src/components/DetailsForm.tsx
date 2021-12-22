@@ -18,11 +18,12 @@ import { darkTheme } from "../theme/theme";
 
 interface Props {
   handleChangeCallback(index: number): void;
+  setFormDataCallback(object: any): void;
 }
 
 const branches = ["COMPS", "IT", "Electronics", "EXTC", "MECH"];
 
-const DetailsForm = ({ handleChangeCallback }: Props) => {
+const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   const [state, setState] = React.useState({
     TechnicalTeam: false,
     PublicRelationsTeam: false,
@@ -55,7 +56,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
       autoComplete="off"
     >
       <div>
-        <TextField error={false} label="Name"/>
+        <TextField error={false} label="Name" />
         <TextField error={false} label="Email" helperText="Incorrect entry." />
       </div>
       <div>

@@ -1,6 +1,4 @@
-import { createContext } from "react";
-
-export interface FormContextType {
+export interface FormDataType {
   email: string;
   name: string;
   phone: string;
@@ -18,5 +16,3 @@ export interface FormContextType {
   linkedin: string;
   q1: string;
 }
-
-export default createContext<FormContextType | null>(null);
