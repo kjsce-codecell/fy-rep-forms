@@ -78,7 +78,7 @@ const DetailsForm = ({
       console.log("Is this even your phone?");
       return;
     }
-    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') > 0) {
+    if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') === 0) {
       setEmailError(true);
       console.log("Is this even your email?");
       return;
