@@ -9,9 +9,11 @@ import {
   FormHelperText,
   FormLabel,
   Button,
+  withTheme,
 } from "@mui/material";
-import { error } from "console";
+import { useTheme } from "@mui/system";
 import React from "react";
+import { darkTheme } from "../theme/theme";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -26,6 +28,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
     CreativeTeam: false,
     Coordinator: false,
   });
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setState({
@@ -87,6 +90,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
                 />
               }
               label="Coordinator"
+              style={{ color: theme.palette.text.primary }}
             />
             <FormControlLabel
               control={
@@ -97,6 +101,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
                 />
               }
               label="Creative Team"
+              style={{ color: theme.palette.text.primary }}
             />
             <FormControlLabel
               control={
@@ -107,6 +112,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
                 />
               }
               label="Public Relations Team"
+              style={{ color: theme.palette.text.primary }}
             />
             <FormControlLabel
               control={
@@ -117,6 +123,7 @@ const DetailsForm = ({ handleChangeCallback }: Props) => {
                 />
               }
               label="Technical Team"
+              style={{ color: theme.palette.text.primary }}
             />
           </FormGroup>
           <FormHelperText>At Most 3</FormHelperText>

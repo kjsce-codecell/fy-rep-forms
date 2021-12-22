@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, ThemeProvider } from "@mui/material";
 import FormContext from "./context/FormContext";
 import FormBox from "./components/FormBox";
-import { darkTheme, lightTheme } from "./theme/theme";
+import { customColors, darkTheme, lightTheme } from "./theme/theme";
 
 function App() {
   const [theme, setTheme] = useState(darkTheme);
@@ -25,6 +25,7 @@ function App() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            background: customColors.outerBg,
           }}
         >
           <FormBox />

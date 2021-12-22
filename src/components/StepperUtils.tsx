@@ -3,14 +3,11 @@ import {
   StepConnector,
   stepConnectorClasses,
   StepIconProps,
-  Stack,
-  Stepper,
-  Step,
-  StepLabel,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import WhatsHotIcon from "@mui/icons-material/Whatshot";
 import FilterTiltShiftIcon from "@mui/icons-material/FilterTiltShift";
+import { customColors } from "../theme/theme";
 
 export const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -18,20 +15,18 @@ export const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      backgroundImage: customColors.stepperColor,
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+      backgroundImage: customColors.stepperColor,
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
     height: 3,
     border: 0,
-    backgroundColor: "#eaeaf0",
+    backgroundColor: customColors.stepperLine,
     borderRadius: 1,
   },
 }));
@@ -49,13 +44,11 @@ export const ColorlibStepIconRoot = styled("div")<{
   justifyContent: "center",
   alignItems: "center",
   ...(ownerState.active && {
-    backgroundImage:
-      "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    backgroundImage: customColors.stepperColor,
     boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
   }),
   ...(ownerState.completed && {
-    backgroundImage:
-      "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    backgroundImage: customColors.stepperColor,
   }),
 }));
 

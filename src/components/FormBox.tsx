@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  colors,
   Stack,
   Step,
   StepButton,
@@ -12,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { customColors } from "../theme/theme";
 import CvForm from "./CvForm";
 import DetailsForm from "./DetailsForm";
 import MotivationForm from "./MotivationForm";
@@ -45,6 +47,7 @@ const FormBox = (props: Props) => {
       flexDirection={"column"}
       boxShadow={2}
       padding={4}
+      sx={{ background: customColors.innerBg }}
     >
       <Stack sx={{ width: "100%", mb: 3 }} spacing={4}>
         <Stepper
