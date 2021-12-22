@@ -16,6 +16,7 @@ import { FormDataType } from "../types/FormData";
 import Lottie from "react-lottie";
 import successAnimationData from "../animations/party.json";
 import errorAnimationData from "../animations/error.json";
+import InfoIcon from "@mui/icons-material/Info";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -108,9 +109,15 @@ const MotivationForm = ({
           <Typography style={{ fontSize: 22, textAlign: "center" }}>
             Why do you want to join CodeCell, and why should we choose you?
           </Typography>
-          <Typography style={{ marginTop: 8, textAlign: "center" }}>
-            Please note that we regard a well-written letter of motivation very
-            highly when reviewing applications.
+          <Typography
+            style={{
+              marginTop: 8,
+              textAlign: "center",
+            }}
+          >
+            <InfoIcon />
+            We regard a well-written letter of motivation very highly when
+            reviewing applications.
           </Typography>
         </Box>
         <TextField
