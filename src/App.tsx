@@ -18,6 +18,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
+          padding: { lg: 2, md: 2, sm: 2 },
           minHeight: "100vh",
           display: "flex",
           justifyContent: "center",

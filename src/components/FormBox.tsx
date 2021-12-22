@@ -74,6 +74,16 @@ const FormBox = (props: Props) => {
       padding={4}
       sx={{ background: customColors.innerBg }}
     >
+      <Box sx={{ mb: 2, textAlign: "center" }}>
+        <img
+          src="/assets/logos/codecell-logo.png"
+          height={50}
+          alt="KJSCE CodeCell"
+        />
+        <Typography style={{ fontSize: 24, marginBlock: 10 }}>
+          Apply for year 2021-22
+        </Typography>
+      </Box>
       <Stack sx={{ width: "100%", mb: 3 }} spacing={4}>
         <Stepper
           alternativeLabel

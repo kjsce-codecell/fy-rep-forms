@@ -11,3 +11,10 @@ git commit -m "🚀 RELEASE: "
 git commit -m "🤖 TEST: "
 git commit -m "!! BREAKING: "
 ```
+
+## TODO:
+
+- bg update
+- logo color
+- small screen bg
+- react confetti
