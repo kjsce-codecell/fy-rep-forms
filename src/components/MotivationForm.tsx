@@ -52,23 +52,21 @@ const MotivationForm = ({
       setMotivationError(true);
       return;
     }
+    setFormDataCallback({ q1: motivationRef.current?.value });
 
-    // test
-
-    // end test
+    setSuccess(true);
+    setFeedBackText({
+      heading: "Applied Sucessfully",
+      content: "Your application has been submitted",
+    });
+    handleOpenModal();
+    return;
 
     if (!formData) return;
     POST({ ...formData }).then((res) => {
       if (res === "Yayay") {
-        setFormDataCallback({ q1: motivationRef.current?.value });
-        setSuccess(true);
-        setFeedBackText({
-          heading: "Registered Sucessfully",
-          content: "Your application has been submitted",
-        });
-        handleOpenModal();
+        console.log("yayayayayay");
       } else if (res === "Email already exists.") {
-        setFormDataCallback({ q1: motivationRef.current?.value });
         setSuccess(false);
         setFeedBackText({
           heading: "Failed to submit",
@@ -76,7 +74,6 @@ const MotivationForm = ({
         });
         handleOpenModal();
       } else {
-        setFormDataCallback({ q1: motivationRef.current?.value });
         setSuccess(false);
         setFeedBackText({
           heading: "Failed to submit",
@@ -164,6 +161,14 @@ const MotivationForm = ({
           >
             {feedBackText.content}
           </DialogContentText>
+          <br />
+          <DialogContentText
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {success && "Made with ❤️ by CodeCell"}
+          </DialogContentText>
         </DialogContent>
         <DialogActions
           style={{
@@ -172,8 +177,8 @@ const MotivationForm = ({
             marginBottom: 10,
           }}
         >
-          <Button onClick={handleCloseModal} autoFocus>
-            OK
+          <Button onClick={handleCloseModal} autoFocus style={{width: '100%'}} variant="contained">
+            NOICE
           </Button>
         </DialogActions>
       </Dialog>
