@@ -44,13 +44,13 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
   const error =
     [Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam].filter(
       (v) => v
-    ).length > 3;
+    ).length < 2;
 
   return (
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
+        "& .MuiTextField-root": { m: 1, width: "35ch" },
       }}
       noValidate
       autoComplete="off"
@@ -110,17 +110,6 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={PublicRelationsTeam}
-                  onChange={handleChange}
-                  name="PublicRelationsTeam"
-                />
-              }
-              label="Public Relations Team"
-              style={{ color: theme.palette.text.primary }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
                   checked={TechnicalTeam}
                   onChange={handleChange}
                   name="TechnicalTeam"
@@ -130,7 +119,7 @@ const DetailsForm = ({ handleChangeCallback, setFormDataCallback }: Props) => {
               style={{ color: theme.palette.text.primary }}
             />
           </FormGroup>
-          <FormHelperText>At Most 3</FormHelperText>
+          <FormHelperText>At Least 2</FormHelperText>
         </FormControl>
       </div>
       <Button onClick={() => handleChangeCallback(1)}>Next</Button>

@@ -3,9 +3,8 @@ import { createTheme } from "@mui/material";
 export const customColors = {
   outerBg: "linear-gradient(to right, #9d50bb, #6e48aa);",
   innerBg: "#edebf2",
-  stepperColor:
-    " linear-gradient(to right, #6441a5, #2a0845); ",
-  stepperLine: "purple",
+  stepperColor: " linear-gradient(to right, #6441a5, #2a0845); ",
+  stepperLine: "lightgrey",
 };
 
 export const darkTheme = createTheme({
