@@ -9,7 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { POST } from "../api/post";
 import { FormDataType } from "../types/FormData";
 // @ts-ignore
@@ -33,6 +33,8 @@ const MotivationForm = ({
     heading: "",
     content: "",
   });
+  const motivationRef = useRef<HTMLInputElement>(null);
+  const [motivationError, setMotivationError] = useState<boolean>(false);
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -43,6 +45,11 @@ const MotivationForm = ({
   };
 
   const handleSubmit = () => {
+    if (motivationRef.current!.value.length === 0) {
+      setMotivationError(true);
+      return;
+    }
+
     setFeedBackText({
       heading: "Wohooo!",
       content:
@@ -94,7 +101,13 @@ const MotivationForm = ({
             highly when reviewing applications.
           </Typography>
         </Box>
-        <TextField multiline minRows={5} />
+        <TextField
+          multiline
+          minRows={5}
+          inputRef={motivationRef}
+          error={motivationError ? true : false}
+          helperText={motivationError ? "This is a required field" : ""}
+        />
       </Box>
       <Box sx={{ float: "right" }}>
         <Button onClick={() => handleChangeCallback(1)}>Previous</Button>
