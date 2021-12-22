@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Example from "./components/Example";
 import FormContext from "./context/FormContext";
+import FormBox from "./components/FormBox";
 
 function App() {
   const formContext = React.useContext(FormContext);
@@ -16,7 +16,7 @@ function App() {
           alignItems: "center",
         }}
       >
-        <Example />
+        <FormBox />
       </Box>
     </FormContext.Provider>
   );

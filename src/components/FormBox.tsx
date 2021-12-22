@@ -18,7 +18,7 @@ import { ColorlibConnector, ColorlibStepIcon, steps } from "./StepperUtils";
 
 interface Props {}
 
-const Example = (props: Props) => {
+const FormBox = (props: Props) => {
   const [activeStep, setActiveStep] = React.useState(2);
 
   const handleChange = (newValue: number) => {
@@ -67,4 +67,4 @@ const Example = (props: Props) => {
   );
 };
 
-export default Example;
+export default FormBox;
