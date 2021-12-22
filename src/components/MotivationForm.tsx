@@ -113,6 +113,8 @@ const MotivationForm = ({
             style={{
               marginTop: 8,
               textAlign: "center",
+              display: "flex",
+              alignItems: "center",
             }}
           >
             <InfoIcon />
