@@ -38,12 +38,12 @@ const CvForm = ({
       return;
     }
 
-    if (!resumeRef.current!.value.includes("https://")) {
+    if (!resumeRef.current!.value.includes(".com")) {
       setResumeError(true);
       console.log("Enter a valid link for resume");
       return;
     }
-    if (!coverRef.current!.value.includes("https://")) {
+    if (!coverRef.current!.value.includes(".com")) {
       setCoverError(true);
       console.log("Enter a valid link for cover");
       return;
