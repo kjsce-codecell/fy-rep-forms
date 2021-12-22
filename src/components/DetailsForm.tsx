@@ -61,6 +61,7 @@ const DetailsForm = ({
   const [nameError, setNameError] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
+  const [branchError, setBranchError] = useState<boolean>(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -68,22 +69,30 @@ const DetailsForm = ({
   const branchRef = useRef<HTMLInputElement>(null);
 
   const checkAndNext = () => {
+    let errorCount = 0;
     if (nameRef.current!.value.length < 2) {
       setNameError(true);
       console.log("Is this even your name?");
-      return;
+      errorCount++;
     }
     if (phoneRef.current!.value.length != 10) {
       setPhoneError(true);
       console.log("Is this even your phone?");
-      return;
+      errorCount++;
     }
     if (!emailRef.current!.value.includes("@") || emailRef.current!.value.indexOf('@') === 0 || !emailRef.current!.value.includes(".com")) {
       setEmailError(true);
       console.log("Is this even your email?");
-      return;
+      errorCount++;
     }
-    handleCallbacks();
+    if (!branchRef.current?.value) {
+      setBranchError(true);
+      console.log("Is this even your email?");
+      errorCount++;
+    }
+    if (errorCount === 0) {
+      handleCallbacks();
+    }
   };
 
   const positionStateToArray = () => {
@@ -173,7 +182,13 @@ const DetailsForm = ({
             options={branches}
             defaultValue={formData?.branch}
             renderInput={(params) => (
-              <TextField {...params} inputRef={branchRef} label="Branch" />
+              <TextField
+                {...params}
+                error={branchError}
+                inputRef={branchRef}
+                label="Branch"
+                helperText={branchError ? "Select your branch" : ""}
+              />
             )}
           />
         </Box>
