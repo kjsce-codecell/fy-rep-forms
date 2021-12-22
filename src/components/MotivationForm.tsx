@@ -14,7 +14,8 @@ import { POST } from "../api/post";
 import { FormDataType } from "../types/FormData";
 // @ts-ignore
 import Lottie from "react-lottie";
-import animationData from "../animations/party.json";
+import successAnimationData from "../animations/party.json";
+import errorAnimationData from "../animations/error.json";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -49,13 +50,17 @@ const MotivationForm = ({
       setMotivationError(true);
       return;
     }
+
+    // test
     setFormDataCallback({ q1: motivationRef.current?.value });
+    setSuccess(false);
     setFeedBackText({
-      heading: "Wohooo!",
-      content:
-        "Thank you for applying to KJSCE CodeCell. We are looking foward to see you at your interview :)",
+      heading: "Whoops!",
+      content: "Error hua kuch to :(",
     });
     handleOpenModal();
+    // end test
+
     if (!formData) return;
     POST({ ...formData }).then((res) => {
       if (res === "Yayay") {
@@ -76,13 +81,20 @@ const MotivationForm = ({
     });
   };
 
-  const defaultOptions = {
+  const commonOptions = {
     loop: true,
     autoplay: true,
-    animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
+  };
+  const successOptions = {
+    animationData: successAnimationData,
+    ...commonOptions,
+  };
+  const errorOptions = {
+    animationData: errorAnimationData,
+    ...commonOptions,
   };
 
   return (
@@ -117,18 +129,12 @@ const MotivationForm = ({
         </Button>
       </Box>
       <Dialog open={open} onClose={handleCloseModal}>
-        <Lottie
-          options={defaultOptions}
-          height={400}
-          width={400}
-          isStopped={false}
-          isPaused={false}
-        />
         <DialogTitle
           style={{
             textAlign: "center",
           }}
         >
+          <Lottie options={success ? successOptions : errorOptions} />
           {feedBackText.heading}
         </DialogTitle>
         <DialogContent>
