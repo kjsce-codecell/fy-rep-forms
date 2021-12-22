@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+video #vid {
+  position: absolute; right: 0; bottom: 0;
+  min-width: 100vw; min-height: 100vh;
+  z-index: -100;
+  
+  
+ }
