@@ -1,11 +1,35 @@
 import { Button, TextField, Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { POST } from "../api/post";
+import FormContext from "../context/FormContext";
 
 interface Props {
   handleChangeCallback(index: number): void;
 }
 
 const MotivationForm = ({ handleChangeCallback }: Props) => {
+  const formData = useContext(FormContext);
+
+  const handleSubmit = () => {
+    POST({ email: formData?.email, ...formData }).then((res) => {
+      if (res === "Yayay") {
+        console.info(
+          "Registered Sucessfully",
+          "Your application has been submitted",
+          "success"
+        );
+      } else if (res === "Email already exists.") {
+        console.info(
+          "Failed to submit",
+          "An application has already been submitted for this email",
+          "error"
+        );
+      } else {
+        console.info("Failed to submit", "Something went wrong", "error");
+      }
+    });
+  };
+
   return (
     <div>
       <Box
@@ -25,6 +49,7 @@ const MotivationForm = ({ handleChangeCallback }: Props) => {
         <TextField label="Multiline" multiline minRows={5} />
       </Box>
       <Button onClick={() => handleChangeCallback(1)}>Prev</Button>
+      <Button onClick={handleSubmit}>Prev</Button>
     </div>
   );
 };
