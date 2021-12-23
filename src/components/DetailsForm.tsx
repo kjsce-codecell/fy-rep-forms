@@ -97,12 +97,8 @@ const DetailsForm = ({
     }
     if (
       !emailRef.current!.value.includes("@") ||
-<<<<<<< HEAD
       emailRef.current!.value.indexOf("@") === 0 ||
       !emailRef.current!.value.includes(".")
-=======
-      emailRef.current!.value.indexOf("@") === 0
->>>>>>> ff72b757b8a1b23e136108f9ad5af3acaf1adac6
     ) {
       setEmailError(true);
       console.log("Is this even your email?");
