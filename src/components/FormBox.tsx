@@ -31,9 +31,9 @@ const FormBox = (props: Props) => {
       const dataLength = calculateDataLength(JSON.parse(lsData));
       if (dataLength < 5) {
         setActiveStep(0);
-      } else if (dataLength >= 5 && dataLength < 7) {
+      } else if (dataLength >= 5 && dataLength < 8) {
         setActiveStep(1);
-      } else if (dataLength >= 7) {
+      } else if (dataLength >= 8) {
         setActiveStep(2);
       }
     } else {
