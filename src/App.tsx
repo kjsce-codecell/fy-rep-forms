@@ -35,7 +35,7 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "url('/assets/apply-codecell.png')",
+          // background: "url('/assets/apply-codecell.png')",
           backgroundSize: "cover",
         }}
       >
