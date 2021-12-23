@@ -70,6 +70,7 @@ const CvForm = ({
       resume: resumeRef.current?.value,
       cover: coverRef.current?.value,
       linkedin: linkedInRef.current?.value,
+      codechef: codechefRef.current?.value,
       github: githubRef.current?.value,
     });
     handleChangeCallback(2);
