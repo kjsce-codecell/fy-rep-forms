@@ -1,21 +1,14 @@
-import { Preview } from "@mui/icons-material";
 import {
   Box,
-  Button,
-  colors,
   Stack,
   Step,
   StepButton,
-  StepContent,
   StepLabel,
   Stepper,
-  Tab,
-  Tabs,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { customColors } from "../theme/theme";
-import { FormDataType } from "../types/FormData";
 import { calculateDataLength } from "../utils/calculateDataLength";
 import CvForm from "./CvForm";
 import DetailsForm from "./DetailsForm";
@@ -28,14 +21,12 @@ const FormBox = (props: Props) => {
   const [activeStep, setActiveStep] = React.useState<number | undefined>();
   const [formData, setFormData] = React.useState<object | undefined>(undefined);
   const handleChange = (newValue: number) => {
-    console.log(newValue);
     setActiveStep(newValue);
   };
 
   useEffect(() => {
     const lsData = localStorage.getItem("CodecellApplyFormData");
     if (lsData) {
-      console.log(lsData);
       setFormData(JSON.parse(lsData));
       const dataLength = calculateDataLength(JSON.parse(lsData));
       if (dataLength < 5) {
@@ -51,7 +42,6 @@ const FormBox = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(formData);
     if (formData != undefined) {
       localStorage.setItem("CodecellApplyFormData", JSON.stringify(formData));
     }

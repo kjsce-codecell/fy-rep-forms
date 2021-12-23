@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import helloAnimationData from "../animations/hello.json";
 // @ts-ignore
 import Lottie from "react-lottie";
-import { Box } from "@mui/material";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -55,9 +54,9 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 export default function WelcomeModal() {
   const [open, setOpen] = React.useState(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
   const handleClose = () => {
     localStorage.setItem("CodecellApplyWelcomeModal", "true");
     setOpen(false);

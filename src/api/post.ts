@@ -1,17 +1,17 @@
-const url = "https://cors-fix.nishit.workers.dev/?" + "" + "&submit=Submit";
-
-export const POST = async (object?: Object) => {
+export const POST = async (initUrl: string, object?: Object) => {
   let headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
   };
 
-  return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
+  const url = initUrl + "&submit=Submit";
+  const corsUrl = "https://cors-fix.nishit.workers.dev/?";
+
+  return fetch(corsUrl + url, {
     method: "POST",
   }).then((res) => {
     console.log(res);
     if (res.status == 200) {
-      
       return fetch(url, {
         method: "POST",
         headers: headers,

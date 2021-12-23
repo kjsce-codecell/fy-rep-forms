@@ -9,13 +9,10 @@ import {
   FormHelperText,
   FormLabel,
   Button,
-  withTheme,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
-import React, { useRef, useEffect, useState } from "react";
-import { darkTheme } from "../theme/theme";
+import React, { useRef, useState } from "react";
 import { FormDataType } from "../types/FormData";
-// import {FormContext} from "../context/FormContext";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -62,27 +59,29 @@ const DetailsForm = ({
   const [phoneError, setPhoneError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [branchError, setBranchError] = useState<boolean>(false);
+  const [positionError, setPositionError] = useState<boolean>(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const branchRef = useRef<HTMLInputElement>(null);
-  
-  var isNumber = function(ch: string){
-    for(let i of ch){
+
+  var isNumber = function (ch: string) {
+    for (let i of ch) {
       console.log(i);
       // if (i.charCodeAt(0) <= 48 && i.charCodeAt(0) >= 57 && i.charCodeAt(0) != 32){
       //   return false;
       // }
-      if(isNumber2(i)){
+      if (isNumber2(i)) {
         return true;
       }
-
     }
     return false;
-  }
+  };
 
-  function isNumber2(n: any) { return /^-?[\d.]+(?:e-?\d+)?$/.test(n); }
+  function isNumber2(n: any) {
+    return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+  }
 
   const checkAndNext = () => {
     let errorCount = 0;
@@ -105,11 +104,12 @@ const DetailsForm = ({
       console.log("Is this even your email?");
       errorCount++;
     }
-    if(branchRef.current!.value.length === 0){
+    if (branchRef.current!.value.length === 0) {
       setBranchError(true);
       errorCount++;
     }
     if (positionPrefError()) {
+      setPositionError(true);
       errorCount++;
     }
     if (errorCount === 0) {
@@ -118,7 +118,7 @@ const DetailsForm = ({
   };
 
   const positionStateToArray = () => {
-    const arr = new Array();
+    const arr = [];
     for (var key in state) {
       if (state.hasOwnProperty(key)) {
         // @ts-ignore
@@ -156,7 +156,6 @@ const DetailsForm = ({
       ).length < 2
     );
   };
-  const error = positionPrefError();
 
   return (
     <Box
@@ -174,6 +173,7 @@ const DetailsForm = ({
         <TextField
           error={nameError ? true : false}
           label="Name"
+          required
           inputRef={nameRef}
           helperText={nameError ? "Enter a valid name" : ""}
           defaultValue={formData?.name}
@@ -181,10 +181,10 @@ const DetailsForm = ({
         <TextField
           error={emailError ? true : false}
           label="Email"
+          required
           helperText={emailError ? "Enter a valid email" : ""}
           inputRef={emailRef}
           defaultValue={formData?.email}
-          required
         />
       </div>
       <div>
@@ -200,6 +200,7 @@ const DetailsForm = ({
           <TextField
             error={phoneError ? true : false}
             label="Mobile Number"
+            required
             inputRef={phoneRef}
             helperText={phoneError ? "Enter a valid number" : ""}
             defaultValue={formData?.phone}
@@ -214,6 +215,7 @@ const DetailsForm = ({
                 error={branchError ? true : false}
                 inputRef={branchRef}
                 label="Branch"
+                required
                 helperText={branchError ? "Select your branch" : ""}
               />
             )}
@@ -221,7 +223,7 @@ const DetailsForm = ({
         </Box>
         <FormControl
           required
-          error={error}
+          error={positionError}
           component="fieldset"
           sx={{ m: 3 }}
           variant="standard"
@@ -262,7 +264,7 @@ const DetailsForm = ({
               style={{ color: theme.palette.text.primary }}
             />
           </FormGroup>
-          <FormHelperText>At Least 2</FormHelperText>
+          <FormHelperText>Select At Least 2</FormHelperText>
         </FormControl>
       </div>
       <Box sx={{ float: "right" }}>

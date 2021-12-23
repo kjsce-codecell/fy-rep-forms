@@ -60,10 +60,24 @@ const MotivationForm = ({
       content: "Your application has been submitted",
     });
     handleOpenModal();
-    return;
+    // return;
 
     if (!formData) return;
-    POST({ ...formData }).then((res) => {
+    const initUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdM_OOVXuHm0RwCcxKrZla-xdB_3vs1EttCABS25DqV8_yEmw/formResponse?usp=pp_url&entry.1060656156=${
+      formData?.name
+    }&entry.1698873613=${formData?.email}&entry.1143253914=${
+      formData?.phone
+    }&entry.1156550514=${"FY"}&entry.1553288753=${
+      formData?.branch
+    }&entry.1416789219=${formData?.positions}&entry.1089965806=${
+      formData?.resume
+    }&entry.809758529=${formData?.cover}&entry.887347889=${
+      formData?.codechef
+    }&entry.903534579=${formData?.github}&entry.1423818616=${
+      formData?.linkedin
+    }&entry.2064142506=${formData?.q1}`;
+
+    POST(initUrl, { ...formData }).then((res) => {
       if (res === "Yayay") {
         console.log("yayayayayay");
       } else if (res === "Email already exists.") {

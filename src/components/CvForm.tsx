@@ -20,8 +20,8 @@ const CvForm = ({
 
   const [resumeError, setResumeError] = useState<boolean>(false);
   const [coverError, setCoverError] = useState<boolean>(false);
-  const [linkedInError, setLinkedInError] = useState<boolean>(false);
-  const [githubError, setGithubError] = useState<boolean>(false);
+  // const [linkedInError, setLinkedInError] = useState<boolean>(false);
+  // const [githubError, setGithubError] = useState<boolean>(false);
 
   const updateCallback = () => {
     setFormDataCallback({
@@ -83,14 +83,16 @@ const CvForm = ({
       <div>
         <TextField
           error={resumeError ? true : false}
-          label="Resume *"
+          label="Resume"
+          required
           helperText={resumeError ? "Enter a valid link for resume" : ""}
           inputRef={resumeRef}
           defaultValue={formData?.resume}
         />
         <TextField
           error={coverError ? true : false}
-          label="Cover Letter *"
+          label="Cover Letter"
+          required
           helperText={coverError ? "Enter a valid link for cover letter" : ""}
           inputRef={coverRef}
           defaultValue={formData?.cover}
@@ -100,14 +102,12 @@ const CvForm = ({
         <TextField
           error={false}
           label="GitHub Profile"
-          helperText={""}
           defaultValue={formData?.github}
           inputRef={githubRef}
         />
         <TextField
           error={false}
           label="LinkedIn Profile"
-          helperText={""}
           defaultValue={formData?.linkedin}
           inputRef={linkedInRef}
         />
