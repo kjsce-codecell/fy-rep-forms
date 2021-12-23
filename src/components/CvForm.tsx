@@ -85,7 +85,11 @@ const CvForm = ({
           error={resumeError ? true : false}
           label="Resume"
           required
-          helperText={resumeError ? "Enter a valid link for resume" : ""}
+          helperText={
+            resumeError
+              ? "Enter a google drive link for resume"
+              : "Google Drive - Public link"
+          }
           inputRef={resumeRef}
           defaultValue={formData?.resume}
         />
@@ -93,7 +97,11 @@ const CvForm = ({
           error={coverError ? true : false}
           label="Cover Letter"
           required
-          helperText={coverError ? "Enter a valid link for cover letter" : ""}
+          helperText={
+            coverError
+              ? "Enter a google drive link for cover letter"
+              : "Google Drive - Public link"
+          }
           inputRef={coverRef}
           defaultValue={formData?.cover}
         />

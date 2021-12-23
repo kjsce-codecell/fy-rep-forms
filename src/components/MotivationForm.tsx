@@ -197,7 +197,7 @@ const MotivationForm = ({
             style={{ width: "100%" }}
             variant="contained"
           >
-            NOICE
+            {success ? "Noice" : "Try again"}
           </Button>
         </DialogActions>
       </Dialog>
