@@ -105,6 +105,10 @@ const DetailsForm = ({
       console.log("Is this even your email?");
       errorCount++;
     }
+    if(branchRef.current!.value.length === 0){
+      setBranchError(true);
+      errorCount++;
+    }
     if (positionPrefError()) {
       errorCount++;
     }
@@ -160,7 +164,7 @@ const DetailsForm = ({
       sx={{
         "& .MuiTextField-root": {
           m: 1,
-          width: { lg: "35ch", xs: "100%", md: "35ch" },
+          width: { lg: "40ch", xs: "100%", md: "35ch" },
         },
       }}
       noValidate
@@ -207,7 +211,7 @@ const DetailsForm = ({
             renderInput={(params) => (
               <TextField
                 {...params}
-                error={branchError}
+                error={branchError ? true : false}
                 inputRef={branchRef}
                 label="Branch"
                 helperText={branchError ? "Select your branch" : ""}

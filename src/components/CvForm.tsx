@@ -74,7 +74,7 @@ const CvForm = ({
       sx={{
         "& .MuiTextField-root": {
           m: 1,
-          width: { lg: "35ch", xs: "100%", md: "35ch" },
+          width: { lg: "40ch", xs: "100%", md: "35ch" },
         },
       }}
       noValidate

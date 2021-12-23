@@ -177,7 +177,12 @@ const MotivationForm = ({
             marginBottom: 10,
           }}
         >
-          <Button onClick={handleCloseModal} autoFocus style={{width: '100%'}} variant="contained">
+          <Button
+            onClick={handleCloseModal}
+            autoFocus
+            style={{ width: "100%" }}
+            variant="contained"
+          >
             NOICE
           </Button>
         </DialogActions>
