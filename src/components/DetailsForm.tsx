@@ -68,7 +68,7 @@ const DetailsForm = ({
 
   var isNumber = function (ch: string) {
     for (let i of ch) {
-      console.log(i);
+      // console.log(i);
       // if (i.charCodeAt(0) <= 48 && i.charCodeAt(0) >= 57 && i.charCodeAt(0) != 32){
       //   return false;
       // }

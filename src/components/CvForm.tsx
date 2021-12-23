@@ -17,9 +17,11 @@ const CvForm = ({
   const coverRef = useRef<HTMLInputElement>(null);
   const linkedInRef = useRef<HTMLInputElement>(null);
   const githubRef = useRef<HTMLInputElement>(null);
+  const codechefRef = useRef<HTMLInputElement>(null);
 
   const [resumeError, setResumeError] = useState<boolean>(false);
   const [coverError, setCoverError] = useState<boolean>(false);
+  const [codechefError, setCodechefError] = useState<boolean>(false);
   // const [linkedInError, setLinkedInError] = useState<boolean>(false);
   // const [githubError, setGithubError] = useState<boolean>(false);
 
@@ -29,6 +31,7 @@ const CvForm = ({
       cover: coverRef.current?.value,
       linkedin: linkedInRef.current?.value,
       github: githubRef.current?.value,
+      codechef: codechefRef.current?.value,
     });
   };
   const handleCallbacks = (jump: number) => {
@@ -46,6 +49,10 @@ const CvForm = ({
     if (!coverRef.current!.value.includes(".com")) {
       setCoverError(true);
       console.log("Enter a valid link for cover");
+      return;
+    }
+    if (!codechefRef.current!.value.includes(".com")) {
+      setCodechefError(true);
       return;
     }
     // if (!linkedInRef.current!.value.includes("https://")) {
@@ -118,6 +125,15 @@ const CvForm = ({
           label="LinkedIn Profile"
           defaultValue={formData?.linkedin}
           inputRef={linkedInRef}
+        />
+      </div>
+      <div>
+        <TextField
+          error={codechefError ? true : false}
+          label="CodeChef Profile"
+          helperText={codechefError ? "Enter a valid Codechef Profile" : ""}
+          defaultValue={formData?.codechef}
+          inputRef={codechefRef}
         />
       </div>
       <Box sx={{ float: "right", mt: 3 }}>

@@ -54,12 +54,7 @@ const MotivationForm = ({
     }
     setFormDataCallback({ q1: motivationRef.current?.value });
 
-    setSuccess(true);
-    setFeedBackText({
-      heading: "Applied Sucessfully",
-      content: "Your application has been submitted",
-    });
-    handleOpenModal();
+
     // return;
 
     if (!formData) return;
@@ -79,7 +74,13 @@ const MotivationForm = ({
 
     POST(initUrl, { ...formData }).then((res) => {
       if (res === "Yayay") {
-        console.log("yayayayayay");
+        setSuccess(true);
+        setFeedBackText({
+          heading: "Applied Sucessfully",
+          content: "Your application has been submitted",
+        });
+        handleOpenModal();
+        //console.log("yayayayayay");
       } else if (res === "Email already exists.") {
         setSuccess(false);
         setFeedBackText({
