@@ -22,8 +22,8 @@ const CvForm = ({
   const [resumeError, setResumeError] = useState<boolean>(false);
   const [coverError, setCoverError] = useState<boolean>(false);
   const [codechefError, setCodechefError] = useState<boolean>(false);
-  // const [linkedInError, setLinkedInError] = useState<boolean>(false);
-  // const [githubError, setGithubError] = useState<boolean>(false);
+  const [linkedInError, setLinkedInError] = useState<boolean>(false);
+  const [githubError, setGithubError] = useState<boolean>(false);
 
   const updateCallback = () => {
     setFormDataCallback({
@@ -41,30 +41,30 @@ const CvForm = ({
       return;
     }
 
-    if (!resumeRef.current!.value.includes(".com")) {
+    if (!resumeRef.current!.value.includes("google.com")) {
       setResumeError(true);
       console.log("Enter a valid link for resume");
       return;
     }
-    if (!coverRef.current!.value.includes(".com")) {
+    if (!coverRef.current!.value.includes("google.com")) {
       setCoverError(true);
       console.log("Enter a valid link for cover");
       return;
     }
-    if (!codechefRef.current!.value.includes(".com")) {
+    if (!linkedInRef.current!.value.includes("linkedin.com")) {
+      setLinkedInError(true);
+      console.log("Enter a valid link for linkedIn profile");
+      return;
+    }
+    if (!githubRef.current!.value.includes("github.com")) {
+      setGithubError(true);
+      console.log("Enter a valid link for github");
+      return;
+    }
+    if (!codechefRef.current!.value.includes("codechef.com")) {
       setCodechefError(true);
       return;
     }
-    // if (!linkedInRef.current!.value.includes("https://")) {
-    //   setLinkedInError(true);
-    //   console.log("Enter a valid link for linkedIn profile");
-    //   return;
-    // }
-    // if (!githubRef.current!.value.includes("https://")) {
-    //   setGithubError(true);
-    //   console.log("Enter a valid link for github");
-    //   return;
-    // }
 
     setFormDataCallback({
       resume: resumeRef.current?.value,
@@ -119,13 +119,17 @@ const CvForm = ({
           error={false}
           label="GitHub Profile"
           defaultValue={formData?.github}
+          helperText={githubError ? "Enter your github profile link" : ""}
           inputRef={githubRef}
+          required
         />
         <TextField
           error={false}
           label="LinkedIn Profile"
           defaultValue={formData?.linkedin}
+          helperText={linkedInError ? "Enter your linkedIn profile link" : ""}
           inputRef={linkedInRef}
+          required
         />
       </div>
       <div>
@@ -135,6 +139,7 @@ const CvForm = ({
           helperText={codechefError ? "Enter a valid Codechef Profile" : ""}
           defaultValue={formData?.codechef}
           inputRef={codechefRef}
+          required
         />
       </div>
       <Box sx={{ float: "right", mt: 3 }}>
