@@ -28,9 +28,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <video autoPlay loop id="vid">
-        <source src="assets/logos/bg.mp4" type="video/mp4" />
-      </video> */}
       <Box
         sx={{
           padding: { lg: 0, md: 2, sm: 2 },
