@@ -17,6 +17,7 @@ import { FormDataType } from "../types/FormData";
 import Lottie from "react-lottie";
 import successAnimationData from "../animations/party.json";
 import errorAnimationData from "../animations/error.json";
+import loadingAnimationData from "../animations/loading.json";
 import InfoIcon from "@mui/icons-material/Info";
 
 interface Props {
@@ -30,7 +31,7 @@ const MotivationForm = ({
   setFormDataCallback,
   formData,
 }: Props) => {
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [feedBackText, setFeedBackText] = useState({
     heading: "",
@@ -54,46 +55,37 @@ const MotivationForm = ({
     }
     setFormDataCallback({ q1: motivationRef.current?.value });
 
+    setSuccess(0);
+    setFeedBackText({
+      heading: "Applied Sucessfully",
+      content: "Your application has been submitted",
+    });
+    handleOpenModal();
+    setFeedBackText({
+      heading: "",
+      content: "Please wait while we are processing your application",
+    });
 
-    // return;
-
-    if (!formData) return;
-    const initUrl = `https://docs.google.com/forms/d/e/1FAIpQLSdM_OOVXuHm0RwCcxKrZla-xdB_3vs1EttCABS25DqV8_yEmw/formResponse?usp=pp_url&entry.1060656156=${
-      formData?.name
-    }&entry.1698873613=${formData?.email}&entry.1143253914=${
-      formData?.phone
-    }&entry.1156550514=${"FY"}&entry.1553288753=${
-      formData?.branch
-    }&entry.1416789219=${formData?.positions}&entry.1089965806=${
-      formData?.resume
-    }&entry.809758529=${formData?.cover}&entry.887347889=${
-      formData?.codechef
-    }&entry.903534579=${formData?.github}&entry.1423818616=${
-      formData?.linkedin
-    }&entry.2064142506=${formData?.q1}`;
-
-    POST(initUrl, { ...formData }).then((res) => {
+    POST({ ...formData }).then((res) => {
       if (res === "Yayay") {
-        setSuccess(true);
-        setFeedBackText({
-          heading: "Applied Sucessfully",
-          content: "Your application has been submitted",
-        });
+        console.log("yayayayayay");
+        setTimeout(() => {
+          setSuccess (1);
+          setFeedBackText({
+            heading: "Applied Sucessfully",
+            content: "Your application has been submitted",
+          });
+        }, 2000);
         handleOpenModal();
-        //console.log("yayayayayay");
-      } else if (res === "Email already exists.") {
-        setSuccess(false);
-        setFeedBackText({
-          heading: "Failed to submit",
-          content: "An application has already been submitted for this email",
-        });
-        handleOpenModal();
-      } else {
-        setSuccess(false);
-        setFeedBackText({
-          heading: "Failed to submit",
-          content: "Something went wrong",
-        });
+      } else if (res === "failed!") {
+        
+        setTimeout(() => {
+          setSuccess(-1);
+          setFeedBackText({
+            heading: "Failed to submit",
+            content: "Something went wrong",
+          });
+        }, 2000);
       }
     });
   };
@@ -113,7 +105,10 @@ const MotivationForm = ({
     animationData: errorAnimationData,
     ...commonOptions,
   };
-
+  const loadingOptions = {
+    animationData: loadingAnimationData,
+    ...commonOptions,
+  };
   return (
     <div>
       <Box
@@ -165,7 +160,7 @@ const MotivationForm = ({
             textAlign: "center",
           }}
         >
-          <Lottie options={success ? successOptions : errorOptions} />
+          <Lottie options={success == 1 ? successOptions : ( success == -1 ? errorOptions : loadingOptions )} />
           {feedBackText.heading}
         </DialogTitle>
         <DialogContent>
@@ -182,7 +177,7 @@ const MotivationForm = ({
               textAlign: "center",
             }}
           >
-            {success && "Made with ❤️ by CodeCell"}
+            {"Made with ❤️ by CodeCell"}
           </DialogContentText>
         </DialogContent>
         <DialogActions
@@ -198,7 +193,7 @@ const MotivationForm = ({
             style={{ width: "100%" }}
             variant="contained"
           >
-            {success ? "Noice" : "Try again"}
+            {success == 1 ? "Noice" : "Try again"}
           </Button>
         </DialogActions>
       </Dialog>
