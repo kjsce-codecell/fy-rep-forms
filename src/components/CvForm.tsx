@@ -35,6 +35,7 @@ const CvForm = ({
     });
   };
   const handleCallbacks = (jump: number) => {
+    let errorCount = 0;
     if (jump == 0) {
       handleChangeCallback(0);
       updateCallback();
@@ -44,25 +45,28 @@ const CvForm = ({
     if (!resumeRef.current!.value.includes("google.com")) {
       setResumeError(true);
       console.log("Enter a valid link for resume");
-      return;
+      errorCount++;
     }
     if (!coverRef.current!.value.includes("google.com")) {
       setCoverError(true);
       console.log("Enter a valid link for cover");
-      return;
+      errorCount++;
     }
     if (!linkedInRef.current!.value.includes("linkedin.com")) {
       setLinkedInError(true);
       console.log("Enter a valid link for linkedIn profile");
-      return;
+      errorCount++;
     }
     if (!githubRef.current!.value.includes("github.com")) {
       setGithubError(true);
       console.log("Enter a valid link for github");
-      return;
+      errorCount++;
     }
     if (!codechefRef.current!.value.includes("codechef.com")) {
       setCodechefError(true);
+      errorCount++;
+    }
+    if (errorCount > 0) {
       return;
     }
 
@@ -116,7 +120,7 @@ const CvForm = ({
       </div>
       <div>
         <TextField
-          error={false}
+          error={githubError}
           label="GitHub Profile"
           defaultValue={formData?.github}
           helperText={githubError ? "Enter your github profile link" : ""}
@@ -124,7 +128,7 @@ const CvForm = ({
           required
         />
         <TextField
-          error={false}
+          error={linkedInError}
           label="LinkedIn Profile"
           defaultValue={formData?.linkedin}
           helperText={linkedInError ? "Enter your linkedIn profile link" : ""}
