@@ -29,8 +29,11 @@ jobs:
         run: |
           npm ci
           CI=false npm run build --if-present
+      - name: copy CNAME file to build dir
+        run: |
+          cp CNAME ./build
       - name: deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.REACT_DEPLOY }}
-          publish_dir: ./build  
+          personal_token: ${{ secrets.REACT_DEPLOY }}
+          publish_dir: ./build
