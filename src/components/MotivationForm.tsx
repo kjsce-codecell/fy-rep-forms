@@ -68,7 +68,7 @@ const MotivationForm = ({
 
     POST({ ...formData }).then((res) => {
       console.log(res);
-      if (res.message === "Yayay") {
+      if (res === "Yayay") {
         console.log("yayayayayay");
         setTimeout(() => {
           setSuccess(1);
