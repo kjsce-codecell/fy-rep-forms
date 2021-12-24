@@ -67,18 +67,27 @@ const MotivationForm = ({
     });
 
     POST({ ...formData }).then((res) => {
-      if (res === "Yayay") {
+      console.log(res);
+      if (res.message === "Yayay") {
         console.log("yayayayayay");
         setTimeout(() => {
-          setSuccess (1);
+          setSuccess(1);
           setFeedBackText({
             heading: "Applied Sucessfully",
             content: "Your application has been submitted",
           });
         }, 2000);
         handleOpenModal();
+      } else if (res === "email-exists") {
+        setTimeout(() => {
+          setSuccess(-1);
+          setFeedBackText({
+            heading: "Failed to submit",
+            content: "An application has already been submitted for this email",
+          });
+        }, 2000);
+        handleOpenModal();
       } else if (res === "failed!") {
-        
         setTimeout(() => {
           setSuccess(-1);
           setFeedBackText({
@@ -160,7 +169,15 @@ const MotivationForm = ({
             textAlign: "center",
           }}
         >
-          <Lottie options={success == 1 ? successOptions : ( success == -1 ? errorOptions : loadingOptions )} />
+          <Lottie
+            options={
+              success == 1
+                ? successOptions
+                : success == -1
+                ? errorOptions
+                : loadingOptions
+            }
+          />
           {feedBackText.heading}
         </DialogTitle>
         <DialogContent>
