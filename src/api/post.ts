@@ -39,7 +39,7 @@ export const POST = async (object?: any) => {
     method: "POST",
   }).then((res) => {
     if (res.status == 200) {
-      fetch(
+      return fetch(
         "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
         {
           method: "POST",
@@ -53,15 +53,19 @@ export const POST = async (object?: any) => {
           mode: "cors",
           cache: "no-cache",
         }
-      ).then((res2) => {
-        if (res2.status === 409) {
-          return "email-exists";
-        } else if (res2.status === 200) {
-          return "Yayay";
-        }
-      });
+      )
+        .then((res2) => {
+          if (res2.status === 409) {
+            return "email-exists";
+          } else if (res2.status === 200) {
+            return "Yayay";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
-      console.log("res.status: ", res.status);
+      // console.log("res.status: ", res.status);
       return res.json();
     }
   });
