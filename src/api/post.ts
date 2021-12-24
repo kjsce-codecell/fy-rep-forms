@@ -54,7 +54,11 @@ export const POST = async (object?: any) => {
           cache: "no-cache",
         }
       ).then((res2) => {
-        if (res2.status === 409) return "email-exists";
+        if (res2.status === 409) {
+          return "email-exists";
+        } else if (res2.status === 200) {
+          return "Yayay";
+        }
       });
     } else {
       console.log("res.status: ", res.status);
