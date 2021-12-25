@@ -49,17 +49,13 @@ const MotivationForm = ({
   };
 
   const handleSubmit = () => {
-    if (motivationRef.current!.value.length < 100) {
+    if (motivationRef.current!.value.trim().length < 50) {
       setMotivationError(true);
       return;
     }
     setFormDataCallback({ q1: motivationRef.current?.value });
 
     setSuccess(0);
-    setFeedBackText({
-      heading: "Applied Sucessfully",
-      content: "Your application has been submitted",
-    });
     handleOpenModal();
     setFeedBackText({
       heading: "",
@@ -148,7 +144,7 @@ const MotivationForm = ({
           minRows={5}
           inputRef={motivationRef}
           error={motivationError ? true : false}
-          helperText={motivationError ? "Minimum 100 characters required" : ""}
+          helperText={motivationError ? "Atleast 50 characters required" : ""}
           defaultValue={formData?.q1}
         />
       </Box>
