@@ -33,9 +33,6 @@ const DetailsForm = ({
         TechnicalTeam: formData?.positions?.includes("TechnicalTeam")
           ? true
           : false,
-        PublicRelationsTeam: formData?.positions?.includes("TechnicalTeam")
-          ? true
-          : false,
         CreativeTeam: formData?.positions?.includes("CreativeTeam")
           ? true
           : false,
@@ -46,7 +43,6 @@ const DetailsForm = ({
     else {
       return {
         TechnicalTeam: false,
-        PublicRelationsTeam: false,
         CreativeTeam: false,
         Coordinator: false,
       };
@@ -146,14 +142,11 @@ const DetailsForm = ({
     });
   };
 
-  const { Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam } =
-    state;
+  const { Coordinator, CreativeTeam, TechnicalTeam } = state;
 
   const positionPrefError = () => {
     return (
-      [Coordinator, CreativeTeam, PublicRelationsTeam, TechnicalTeam].filter(
-        (v) => v
-      ).length < 2
+      [Coordinator, CreativeTeam, TechnicalTeam].filter((v) => v).length < 2
     );
   };
 
