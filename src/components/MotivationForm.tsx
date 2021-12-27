@@ -69,34 +69,34 @@ const MotivationForm = ({
 
     POST({ ...formData }).then((res) => {
       console.log(res);
-      // if (res === "Yayay") {
-      //   console.log("yayayayayay");
-      //   setTimeout(() => {
-      //     setSuccess(1);
-      //     setFeedBackText({
-      //       heading: "Applied Sucessfully",
-      //       content: "Your application has been submitted",
-      //     });
-      //   }, 2000);
-      //   handleOpenModal();
-      // } else if (res === "email-exists") {
-      //   setTimeout(() => {
-      //     setSuccess(-1);
-      //     setFeedBackText({
-      //       heading: "Failed to submit",
-      //       content: "An application has already been submitted for this email",
-      //     });
-      //   }, 2000);
-      //   handleOpenModal();
-      // } else if (res === "failed!") {
-      //   setTimeout(() => {
-      //     setSuccess(-1);
-      //     setFeedBackText({
-      //       heading: "Failed to submit",
-      //       content: "Something went wrong",
-      //     });
-      //   }, 2000);
-      // }
+      if (res === "Yayay") {
+        console.log("yayayayayay");
+        setTimeout(() => {
+          setSuccess(1);
+          setFeedBackText({
+            heading: "Applied Sucessfully",
+            content: "Your application has been submitted",
+          });
+        }, 2000);
+        handleOpenModal();
+      } else if (res === "email-exists") {
+        setTimeout(() => {
+          setSuccess(-1);
+          setFeedBackText({
+            heading: "Failed to submit",
+            content: "An application has already been submitted for this email",
+          });
+        }, 2000);
+        handleOpenModal();
+      } else if (res === "failed!") {
+        setTimeout(() => {
+          setSuccess(-1);
+          setFeedBackText({
+            heading: "Failed to submit",
+            content: "Something went wrong",
+          });
+        }, 2000);
+      }
     });
   };
 

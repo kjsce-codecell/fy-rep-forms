@@ -69,17 +69,18 @@ export const POST = async (object?: any) => {
       console.log("Document written with ID: ", docRef.id);
     } else {
       console.log("baaar baar mat kar");
-      return;
+      return "email-exists";
     }
   } catch (e) {
     console.error("Error adding document: ", e);
+    return "failed!";
   }
   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
     method: "POST",
   }).then((res) => {
     if (res.status == 200) {
       console.log("Submitted to sheet ✅");
-
+      return "Yayay";
       // return fetch(
       //   "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
       //   {
@@ -107,7 +108,7 @@ export const POST = async (object?: any) => {
       //   });
     } else {
       // console.log("res.status: ", res.status);
-      return res.json();
+      return "failed!";
     }
   });
 };
