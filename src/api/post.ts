@@ -1,5 +1,9 @@
-import firebase from "firebase/compat/app";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import "firebase/firestore";
+
+import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase.config";
+const firebaseApp = initializeApp(firebaseConfig);
 
 export const POST = async (object?: any) => {
   var branch = object.branch;
@@ -38,55 +42,51 @@ export const POST = async (object?: any) => {
     url,
   };
 
-  firebase.initializeApp({
-    apiKey: "AIzaSyDNt15j_oyl_P1ciIz0AoyBAWB1wbC3b3o",
-    authDomain: "codecell-interview-post-trauma.firebaseapp.com",
-    projectId: "codecell-interview-post-trauma",
-    storageBucket: "codecell-interview-post-trauma.appspot.com",
-    messagingSenderId: "1073658133470",
-    appId: "1:1073658133470:web:d63ccf17ebbad33509bb4f",
-  });
+  const db = getFirestore();
+  // const responseRef = db.collection("responses_21-22");
 
+  // await responseRef.add(allData);
+  console.log({ db, firebaseApp });
+  try {
+    const docRef = await addDoc(collection(db, "responses_21-22"), allData);
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+    return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
+      method: "POST",
+    }).then((res) => {
+      if (res.status == 200) {
+        console.log("Submitted to sheet ✅")
 
-  const firestore = firebase.firestore();
-  const responseRef = firestore.collection("responses_21-22");
-
-  await responseRef.add(allData);
-
-
-
-  //   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
-  //     method: "POST",
-  //   }).then((res) => {
-  //     if (res.status == 200) {
-  //       return fetch(
-  //         "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
-  //         {
-  //           method: "POST",
-  //           body: JSON.stringify({
-  //             email: email,
-  //             data: allData,
-  //           }),
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           mode: "cors",
-  //           cache: "no-cache",
-  //         }
-  //       )
-  //         .then((res2) => {
-  //           if (res2.status === 409) {
-  //             return "email-exists";
-  //           } else if (res2.status === 200) {
-  //             return "Yayay";
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     } else {
-  //       // console.log("res.status: ", res.status);
-  //       return res.json();
-  //     }
-  //   });
+        // return fetch(
+        //   "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
+        //   {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //       email: email,
+        //       data: allData,
+        //     }),
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     mode: "cors",
+        //     cache: "no-cache",
+        //   }
+        // )
+        //   .then((res2) => {
+        //     if (res2.status === 409) {
+        //       return "email-exists";
+        //     } else if (res2.status === 200) {
+        //       return "Yayay";
+        //     }
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+      } else {
+        // console.log("res.status: ", res.status);
+        return res.json();
+      }
+    });
 };
