@@ -1,0 +1,487 @@
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const nodemailer = require("nodemailer");
+const cors = require("cors")({ origin: true });
+admin.initializeApp();
+const db = admin.firestore();
+
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "codecell.engg@somaiya.edu",
+    pass: "vrtfrhathzknbfnm",
+  },
+});
+
+function getHTML(obj) {
+  let {
+    name,
+    email,
+    phone,
+    year,
+    branch,
+    resume,
+    positions,
+    cover,
+    codechef,
+    github,
+    linkedin,
+  } = obj;
+  posstr = "";
+  for (let i = 0; i < positions.length; i++) {
+    posstr += positions[i] + "<br/>";
+  }
+  positions = posstr;
+  return `<!doctype html>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office">
+    
+    <head>
+      <title>
+        Registration ACK
+      </title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style type="text/css">
+        a {
+          color: blue;
+        }
+    
+        #outlook a {
+          padding: 0;
+        }
+    
+        .ReadMsgBody {
+          width: 100%;
+        }
+    
+        .ExternalClass {
+          width: 100%;
+        }
+    
+        .ExternalClass * {
+          line-height: 100%;
+        }
+    
+        body {
+          margin: 0;
+          padding: 0;
+          -webkit-text-size-adjust: 100%;
+          -ms-text-size-adjust: 100%;
+    
+        }
+    
+        table,
+        td {
+          border-collapse: collapse;
+          mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+        }
+    
+        img {
+          border: 0;
+          height: auto;
+          line-height: 100%;
+          outline: none;
+          text-decoration: none;
+          -ms-interpolation-mode: bicubic;
+        }
+    
+        p {
+          display: block;
+          margin: 13px 0;
+        }
+    
+        .field-set {
+          background-color: #D8D8D8;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+        .field-name {
+          font-size: larger;
+        }
+    
+      </style>
+      <!--[if !mso]><!-->
+      <style type="text/css">
+        @media only screen and (max-width:480px) {
+          @-ms-viewport {
+            width: 320px;
+          }
+    
+          @viewport {
+            width: 320px;
+          }
+        }
+      </style>
+      <link rel="stylesheet" text="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
+      <style type="text/css">
+        @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css);
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);
+      </style>
+      <style type="text/css">
+        @media only screen and (min-width:480px) {
+          .mj-column-per-80 {
+            width: 85% !important;
+          }
+    
+          .mj-column-per-100 {
+            width: 100% !important;
+          }
+        }
+    
+        .mj-column-per-20 {
+          width: 20% !important;
+        }
+      </style>
+      <style type="text/css">
+        .float {
+          margin-top: 5px;
+    
+          width: 90%;
+    
+        }
+    
+        .footer {
+          width: 80%;
+    
+        }
+    
+        .hack {
+          font-size: 30px;
+        }
+    
+        .hi {
+          font-size: 22px;
+        }
+    
+        @media only screen and (max-width: 700px) {
+    
+          .hack {
+            font-size: 20px;
+          }
+    
+          .hi {
+            font-size: 18px;
+          }
+    
+        }
+      </style>
+    </head>
+    
+    <body style="background-color: #2a0845;">
+      <div>
+        <div style="Margin:0px auto;max-width:600px;">
+    
+          <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+            <tbody>
+              <tr>
+                <td style="direction:ltr;font-size:0px;padding:10px 0;text-align:center;vertical-align:top;">
+                </td>
+              </tr>
+              <tr>
+                <td style="width:350px;">
+                  <div style="width: 350px; margin:auto;">
+    
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    
+        </div>
+        <div class="float"
+          style="background:rgb(255, 255, 255);background-color:rgb(255, 255, 255);Margin:0px auto;max-width:600px;">
+          <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation"
+            style="background:rgb(255, 255, 255);background-color:rgb(255, 255, 255);">
+            <tbody>
+              <tr>
+                <td style="direction:ltr;font-size:0px;padding:10px 0;text-align:center;vertical-align:top;">
+                  <div class="mj-column-per-80 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:10px 10px;word-break:break-word;">
+                          <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                            style="border-collapse:collapse;border-spacing:0px;">
+                            <tbody>
+    
+                            </tbody>
+                          </table>
+    
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" background="#515151"
+                          style="background:#ffffff;font-size:0px;padding:2.5px 2.5px; word-break:break-word;">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="left" style="font-size:0px;padding:10px 10px;word-break:break-word;">
+                          <img width="100%"
+                            src="https://raw.githubusercontent.com/kjsce-codecell/fy-rep-forms/dev/public/assets/logos/cropbgpurple.png"
+                            alt="KJSCE CodeCell">
+                          <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:1;color:#000; ">Hi
+                            ${name},
+                          </div>
+                          <div
+                            style="font-family: Arial, Helvetica, sans-serif;font-size:14px;line-height:1.6;text-align:left;color:#000;">
+                            <p>
+                              This email is to confirm your application for KJSCE CodeCell 20-21
+                            </p>
+                            Here's what we got from you<br /><br />
+    
+                            <div class="field-set">
+                              <span class="field-name">Name</span>
+                              <div class="field-result">${name}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Email</span>
+                              <div class="field-result">${email}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Phone</span>
+                              <div class="field-result">${phone}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Year</span>
+                              <div class="field-result">${year}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Branch</span>
+                              <div class="field-result">${branch}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Resume</span>
+                              <div class="field-result">${resume}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Positions (not in any particular order)</span><br />
+                              <div class="field-result">${positions}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Cover Letter</span>
+                              <div class="field-result">${cover}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">CodeChef</span>
+                              <div class="field-result">${codechef}</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Github</span>
+                              <div class="field-result">${
+                                github != "" ? github : "Empty"
+                              }</div>
+                            </div>
+                            <br />
+                            <div class="field-set">
+                              <span class="field-name">Linkedin</span>
+                              <div class="field-result">${
+                                linkedin != "" ? linkedin : "Empty"
+                              }</div>
+    
+                            </div>
+                            <br />
+                            <br />
+    
+                            There will be a screening process before the interview. So if the entered details are not
+                            correct, please contact us immediately by replying to this email.
+                            <br /><br />
+                            You should especially check if the resume and cover letter are visible ( set to "anyone with the
+                            link can view").
+                            Applications where the resume or cover letter cannot be accessed by us will <b>not</b> be
+                            considered for further process.
+    
+    
+                          </div>
+                        </td>
+                      </tr>
+    
+                      <tr>
+                        <td style="font-size:0px;padding:10px 10px;word-break:break-word;">
+                          <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:1.5;color:#555;">
+                            Regards,<br />
+                            KJSCE CodeCell
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer" style="Margin:0px auto;max-width:600px;">
+          <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+            <tbody>
+              <tr>
+                <td
+                  style="direction:ltr;font-size:0px;padding:20px 0;padding-bottom:0;text-align:center;vertical-align:top;">
+                  <div class="mj-column-per-20 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:5px 5px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:25px;line-height:1;text-align:center;color:white;">
+                            <a href="https://www.facebook.com/kjscecodecell/"><img width="25px"
+                                src="https://kjscehackmails.surge.sh/facebook.png"></img></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="mj-column-per-20 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:5px 5px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:25px;line-height:1;text-align:center;color:white;">
+                            <a href="https://www.instagram.com/kjsce_codecell/?hl=en"><img width="25px"
+                                src="https://kjscehackmails.surge.sh/instagram.png"></img></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="mj-column-per-20 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:5px 5px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:25px;line-height:1;text-align:center;color:white;">
+                            <a href="https://twitter.com/kjsce_codecell?lang=en"><img width="25px"
+                                src="https://kjscehackmails.surge.sh/twitter.png"></img></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="mj-column-per-20 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:5px 5px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:25px;line-height:1;text-align:center;color:white;">
+                            <a href="https://github.com/KJSCE-Codecell"><img width="25px"
+                                src="https://kjscehackmails.surge.sh/github.png"></img></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="mj-column-per-20 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:5px 5px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:25px;line-height:1;text-align:center;color:white;">
+                            <a href="https://www.linkedin.com/company/kjscecodecell/about/"><img width="25px"
+                                src="https://kjscehackmails.surge.sh/linkedin.png"></img></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="Margin:0px auto;max-width:600px;">
+          <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+            <tbody>
+              <tr>
+                <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:0;text-align:center;vertical-align:top;">
+                  <div class="mj-column-per-100 outlook-group-fix"
+                    style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;"
+                      width="100%">
+                      <tr>
+                        <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                          <div
+                            style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:center;color:white;">
+                            Copyright © KJSCE Codecell, All rights reserved.
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </body>`;
+}
+
+exports.sendMail = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    // getting dest email by query string
+    const dest = req.body.email;
+    const data = req.body.data;
+    console.log(dest);
+    console.log(data);
+    console.log(req.body);
+
+    let chkEmail = db.collection("email_20-21");
+    let getDoc = chkEmail
+      .where("dest", "==", dest)
+      .get()
+      .then((snapshot) => {
+        if (!snapshot.empty) {
+          res.status(409).send("Email already exists.");
+          return;
+        } else {
+          db.collection("email_20-21").add({
+            dest: dest,
+            data: data,
+          });
+
+          const mailOptions = {
+            from: "KJSCE CodeCell <join@kjscecodecell.com>", // Something like: Jane Doe <janedoe@gmail.com>
+            to: dest,
+            subject: "Interview Application Confirmation", // email subject
+            html: getHTML(data),
+          };
+          return transporter.sendMail(mailOptions, (erro, info) => {
+            if (erro) {
+              return res.send(erro.toString());
+            }
+            return res.send("Yayay");
+          });
+        }
+      }); // returning result
+  });
+});
