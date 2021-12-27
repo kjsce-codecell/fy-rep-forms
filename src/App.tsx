@@ -3,6 +3,7 @@ import { Box, ThemeProvider } from "@mui/material";
 import FormBox from "./components/FormBox";
 import { lightTheme } from "./theme/theme";
 import WelcomeModal from "./components/WelcomeModal";
+import Construction from "./components/Construction";
 
 function App() {
   const [theme] = useState(lightTheme);
@@ -39,7 +40,8 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        {showWelcome === true && <WelcomeModal />}
+        <Construction />
+        {/* {showWelcome === true && <WelcomeModal />} */}
         <FormBox />
       </Box>
     </ThemeProvider>
