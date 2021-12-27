@@ -40,8 +40,8 @@ function App() {
           backgroundSize: "cover",
         }}
       >
-        <Construction />
-        {/* {showWelcome === true && <WelcomeModal />} */}
+        {/* <Construction /> */}
+        {showWelcome === true && <WelcomeModal />}
         <FormBox />
       </Box>
     </ThemeProvider>

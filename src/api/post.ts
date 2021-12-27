@@ -1,4 +1,5 @@
 import firebase from "firebase/compat/app";
+import { firebaseConfig } from "../config/firebase.config";
 
 export const POST = async (object?: any) => {
   var branch = object.branch;
@@ -37,8 +38,20 @@ export const POST = async (object?: any) => {
     url,
   };
 
+  firebase.initializeApp({
+    apiKey: "AIzaSyDNt15j_oyl_P1ciIz0AoyBAWB1wbC3b3o",
+    authDomain: "codecell-interview-post-trauma.firebaseapp.com",
+    projectId: "codecell-interview-post-trauma",
+    storageBucket: "codecell-interview-post-trauma.appspot.com",
+    messagingSenderId: "1073658133470",
+    appId: "1:1073658133470:web:d63ccf17ebbad33509bb4f",
+  });
+
+
   const firestore = firebase.firestore();
-  const messagesRef = firestore.collection("responses_21-22");
+  const responseRef = firestore.collection("responses_21-22");
+
+
 
   //   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
   //     method: "POST",
