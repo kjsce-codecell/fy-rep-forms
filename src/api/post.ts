@@ -51,6 +51,8 @@ export const POST = async (object?: any) => {
   const firestore = firebase.firestore();
   const responseRef = firestore.collection("responses_21-22");
 
+  await responseRef.add(allData);
+
 
 
   //   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
