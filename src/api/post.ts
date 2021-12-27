@@ -1,3 +1,5 @@
+import firebase from "firebase/compat/app";
+
 export const POST = async (object?: any) => {
   var branch = object.branch;
   var email = object.email;
@@ -35,38 +37,41 @@ export const POST = async (object?: any) => {
     url,
   };
 
-  return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
-    method: "POST",
-  }).then((res) => {
-    if (res.status == 200) {
-      return fetch(
-        "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: email,
-            data: allData,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "cors",
-          cache: "no-cache",
-        }
-      )
-        .then((res2) => {
-          if (res2.status === 409) {
-            return "email-exists";
-          } else if (res2.status === 200) {
-            return "Yayay";
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      // console.log("res.status: ", res.status);
-      return res.json();
-    }
-  });
+  const firestore = firebase.firestore();
+  const messagesRef = firestore.collection("responses_21-22");
+
+  //   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
+  //     method: "POST",
+  //   }).then((res) => {
+  //     if (res.status == 200) {
+  //       return fetch(
+  //         "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
+  //         {
+  //           method: "POST",
+  //           body: JSON.stringify({
+  //             email: email,
+  //             data: allData,
+  //           }),
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           mode: "cors",
+  //           cache: "no-cache",
+  //         }
+  //       )
+  //         .then((res2) => {
+  //           if (res2.status === 409) {
+  //             return "email-exists";
+  //           } else if (res2.status === 200) {
+  //             return "Yayay";
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     } else {
+  //       // console.log("res.status: ", res.status);
+  //       return res.json();
+  //     }
+  //   });
 };
