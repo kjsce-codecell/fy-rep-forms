@@ -1,19 +1,19 @@
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  where,
-  query,
-  getDocs,
-} from "firebase/firestore";
-import "firebase/firestore";
+// import {
+//   getFirestore,
+//   collection,
+//   addDoc,
+//   getDoc,
+//   where,
+//   query,
+//   getDocs,
+// } from "firebase/firestore";
+// import "firebase/firestore";
 
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../config/firebase.config";
-const firebaseApp = initializeApp(firebaseConfig);
+// import { initializeApp } from "firebase/app";
+// import { firebaseConfig } from "../config/firebase.config";
+// const firebaseApp = initializeApp(firebaseConfig);
 
-export const POST = async (object?: any) => {
+export const POST = async (motivation: string, object?: any) => {
   var branch = object.branch;
   var email = object.email;
   var name = object.name;
@@ -23,7 +23,7 @@ export const POST = async (object?: any) => {
   var github = object.github;
   var linkedin = object.linkedin;
   var codechef = object.codechef;
-  var q1 = object.q1;
+  var q1 = motivation;
   var year = "FY";
   var positions = " ";
   object.positions.forEach((element: String) => {
@@ -50,62 +50,67 @@ export const POST = async (object?: any) => {
     url,
   };
 
-  const db = getFirestore();
-  // const responseRef = db.collection("responses_21-22");
+  // console.log("q1: ", q1);
 
-  // await responseRef.add(allData);
-  console.log({ db, firebaseApp });
+  // return "Yayay";
 
-  try {
-    const q = query(
-      collection(db, "responses_21-22"),
-      where("email", "==", allData.email)
-    );
+  // const db = getFirestore();
+  // // const responseRef = db.collection("responses_21-22");
 
-    const querySnapshot = await getDocs(q);
+  // // await responseRef.add(allData);
+  // console.log({ db, firebaseApp });
 
-    if (querySnapshot.empty) {
-      const docRef = await addDoc(collection(db, "responses_21-22"), allData);
-      console.log("Document written with ID: ", docRef.id);
-    } else {
-      console.log("baaar baar mat kar");
-      return "email-exists";
-    }
-  } catch (e) {
-    console.error("Error adding document: ", e);
-    return "failed!";
-  }
+  // try {
+  //   const q = query(
+  //     collection(db, "responses_21-22"),
+  //     where("email", "==", allData.email)
+  //   );
+
+  //   const querySnapshot = await getDocs(q);
+
+  //   if (querySnapshot.empty) {
+  //     const docRef = await addDoc(collection(db, "responses_21-22"), allData);
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } else {
+  //     console.log("baaar baar mat kar");
+  //     return "email-exists";
+  //   }
+  // } catch (e) {
+  //   console.error("Error adding document: ", e);
+  //   return "failed!";
+  // }
+
   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
     method: "POST",
   }).then((res) => {
     if (res.status == 200) {
       console.log("Submitted to sheet ✅");
-      return "Yayay";
-      // return fetch(
-      //   "https://cors-fix.nishit.workers.dev/?https://us-central1-codecell-interviews.cloudfunctions.net/sendMail",
-      //   {
-      //     method: "POST",
-      //     body: JSON.stringify({
-      //       email: email,
-      //       data: allData,
-      //     }),
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     mode: "cors",
-      //     cache: "no-cache",
-      //   }
-      // )
-      //   .then((res2) => {
-      //     if (res2.status === 409) {
-      //       return "email-exists";
-      //     } else if (res2.status === 200) {
-      //       return "Yayay";
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+      return fetch(
+        "https://cors-fix.nishit.workers.dev/?https://us-central1-kjsce-codecell-registrations.cloudfunctions.net/sendEmail",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            data: allData,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+          cache: "no-cache",
+        }
+      )
+        .then((res2) => {
+          if (res2.status === 409) {
+            return "email-exists";
+          } else if (res2.status === 200) {
+            return "Yayay";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          return err;
+        });
     } else {
       // console.log("res.status: ", res.status);
       return "failed!";

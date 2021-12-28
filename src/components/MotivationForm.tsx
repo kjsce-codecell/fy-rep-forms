@@ -63,41 +63,40 @@ const MotivationForm = ({
       content: "Please wait while we are processing your application",
     });
 
-
-
-  
-
-    POST({ ...formData }).then((res) => {
-      console.log(res);
-      if (res === "Yayay") {
-        console.log("yayayayayay");
-        setTimeout(() => {
-          setSuccess(1);
-          setFeedBackText({
-            heading: "Applied Sucessfully",
-            content: "Your application has been submitted",
-          });
-        }, 2000);
-        handleOpenModal();
-      } else if (res === "email-exists") {
-        setTimeout(() => {
-          setSuccess(-1);
-          setFeedBackText({
-            heading: "Failed to submit",
-            content: "An application has already been submitted for this email",
-          });
-        }, 2000);
-        handleOpenModal();
-      } else if (res === "failed!") {
-        setTimeout(() => {
-          setSuccess(-1);
-          setFeedBackText({
-            heading: "Failed to submit",
-            content: "Something went wrong",
-          });
-        }, 2000);
+    POST(motivationRef.current?.value as string, { ...formData }).then(
+      (res) => {
+        console.log(res);
+        if (res === "Yayay") {
+          console.log("yayayayayay");
+          setTimeout(() => {
+            setSuccess(1);
+            setFeedBackText({
+              heading: "Applied Sucessfully",
+              content: "Your application has been submitted",
+            });
+          }, 1000);
+          handleOpenModal();
+        } else if (res === "email-exists") {
+          setTimeout(() => {
+            setSuccess(-1);
+            setFeedBackText({
+              heading: "Failed to submit",
+              content:
+                "An application has already been submitted for this email",
+            });
+          }, 1000);
+          handleOpenModal();
+        } else if (res === "failed!") {
+          setTimeout(() => {
+            setSuccess(-1);
+            setFeedBackText({
+              heading: "Failed to submit",
+              content: "Something went wrong",
+            });
+          }, 1000);
+        }
       }
-    });
+    );
   };
 
   const commonOptions = {
