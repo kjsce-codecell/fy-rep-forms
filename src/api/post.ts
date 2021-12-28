@@ -1,17 +1,17 @@
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDoc,
-  where,
-  query,
-  getDocs,
-} from "firebase/firestore";
-import "firebase/firestore";
+// import {
+//   getFirestore,
+//   collection,
+//   addDoc,
+//   getDoc,
+//   where,
+//   query,
+//   getDocs,
+// } from "firebase/firestore";
+// import "firebase/firestore";
 
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../config/firebase.config";
-const firebaseApp = initializeApp(firebaseConfig);
+// import { initializeApp } from "firebase/app";
+// import { firebaseConfig } from "../config/firebase.config";
+// const firebaseApp = initializeApp(firebaseConfig);
 
 export const POST = async (motivation: string, object?: any) => {
   var branch = object.branch;
@@ -50,7 +50,7 @@ export const POST = async (motivation: string, object?: any) => {
     url,
   };
 
-  console.log("q1: ", q1);
+  // console.log("q1: ", q1);
 
   // return "Yayay";
 
