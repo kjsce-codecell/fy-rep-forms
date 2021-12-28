@@ -13,7 +13,7 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase.config";
 const firebaseApp = initializeApp(firebaseConfig);
 
-export const POST = async (object?: any) => {
+export const POST = async (motivation: string, object?: any) => {
   var branch = object.branch;
   var email = object.email;
   var name = object.name;
@@ -23,7 +23,7 @@ export const POST = async (object?: any) => {
   var github = object.github;
   var linkedin = object.linkedin;
   var codechef = object.codechef;
-  var q1 = object.q1;
+  var q1 = motivation;
   var year = "FY";
   var positions = " ";
   object.positions.forEach((element: String) => {
@@ -49,6 +49,10 @@ export const POST = async (object?: any) => {
     q3: "",
     url,
   };
+
+  console.log("q1: ", q1);
+
+  // return "Yayay";
 
   // const db = getFirestore();
   // // const responseRef = db.collection("responses_21-22");
