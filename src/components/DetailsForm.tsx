@@ -9,6 +9,7 @@ import {
   FormHelperText,
   FormLabel,
   Button,
+  ButtonGroup,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 import React, { useRef, useState } from "react";
@@ -57,6 +58,8 @@ const DetailsForm = ({
   const [branchError, setBranchError] = useState<boolean>(false);
   const [positionError, setPositionError] = useState<boolean>(false);
 
+  const [selectedBtn, setSelectedBtn] = React.useState("SY");
+
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -64,10 +67,6 @@ const DetailsForm = ({
 
   var isNumber = function (ch: string) {
     for (let i of ch) {
-      // console.log(i);
-      // if (i.charCodeAt(0) <= 48 && i.charCodeAt(0) >= 57 && i.charCodeAt(0) != 32){
-      //   return false;
-      // }
       if (isNumber2(i)) {
         return true;
       }
@@ -214,6 +213,23 @@ const DetailsForm = ({
             )}
           />
         </Box>
+        <FormControl component="fieldset" sx={{ m: 3 }} variant="standard">
+          <FormLabel component="legend">I am an incoming</FormLabel>
+          <ButtonGroup disableElevation variant="contained" color="primary">
+            <Button
+              variant={selectedBtn === "SY" ? "contained" : "outlined"}
+              onClick={() => setSelectedBtn("SY")}
+            >
+              SY
+            </Button>
+            <Button
+              variant={selectedBtn === "TY" ? "contained" : "outlined"}
+              onClick={() => setSelectedBtn("TY")}
+            >
+              TY
+            </Button>
+          </ButtonGroup>
+        </FormControl>
         <FormControl
           required
           error={positionError}

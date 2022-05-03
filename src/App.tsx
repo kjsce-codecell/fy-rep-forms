@@ -22,7 +22,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <ClosedModal /> */}
       {window.location.pathname === "/apna-public-only" ? (
         <Box
           sx={{
