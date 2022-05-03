@@ -15,6 +15,7 @@ import { useTheme } from "@mui/system";
 import React, { useRef, useState } from "react";
 import { FormDataType } from "../types/FormData";
 import PositionPrefrenceSy from "./PositionPrefrence/PositionPrefrenceSy";
+import PositionPrefrenceTy from "./PositionPrefrence/PositionPrefrenceTy";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -60,6 +61,8 @@ const DetailsForm = ({
   }
 
   const checkAndNext = () => {
+    console.log(positions);
+
     let errorCount = 0;
     if (nameRef.current!.value.length < 2 || isNumber(nameRef.current!.value)) {
       setNameError(true);
@@ -189,11 +192,19 @@ const DetailsForm = ({
             </Button>
           </ButtonGroup>
         </FormControl>
-        <PositionPrefrenceSy
-          formData={formData}
-          positionError={positionError}
-          setPositions={setPositions}
-        />
+        {selectedBtn === "SY" ? (
+          <PositionPrefrenceSy
+            formData={formData}
+            positionError={positionError}
+            setPositions={setPositions}
+          />
+        ) : (
+          <PositionPrefrenceTy
+            formData={formData}
+            positionError={positionError}
+            setPositions={setPositions}
+          />
+        )}
       </div>
       <Box sx={{ float: "right" }}>
         <Button onClick={() => checkAndNext()} variant="contained">
