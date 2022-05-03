@@ -14,6 +14,7 @@ import {
 import { useTheme } from "@mui/system";
 import React, { useRef, useState } from "react";
 import { FormDataType } from "../types/FormData";
+import PositionPrefrenceSy from "./PositionPrefrence/PositionPrefrenceSy";
 
 interface Props {
   handleChangeCallback(index: number): void;
@@ -28,28 +29,6 @@ const DetailsForm = ({
   setFormDataCallback,
   formData,
 }: Props) => {
-  const getState = () => {
-    if (formData?.positions && formData?.positions?.length > 0)
-      return {
-        TechnicalTeam: formData?.positions?.includes("TechnicalTeam")
-          ? true
-          : false,
-        CreativeTeam: formData?.positions?.includes("CreativeTeam")
-          ? true
-          : false,
-        Coordinator: formData?.positions?.includes("Coordinator")
-          ? true
-          : false,
-      };
-    else {
-      return {
-        TechnicalTeam: false,
-        CreativeTeam: false,
-        Coordinator: false,
-      };
-    }
-  };
-  const [state, setState] = React.useState(getState());
   const theme = useTheme();
 
   const [nameError, setNameError] = useState<boolean>(false);
@@ -59,6 +38,8 @@ const DetailsForm = ({
   const [positionError, setPositionError] = useState<boolean>(false);
 
   const [selectedBtn, setSelectedBtn] = React.useState("SY");
+
+  const [positions, setPositions] = useState<string[]>([]);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -112,41 +93,19 @@ const DetailsForm = ({
     }
   };
 
-  const positionStateToArray = () => {
-    const arr = [];
-    for (var key in state) {
-      if (state.hasOwnProperty(key)) {
-        // @ts-ignore
-        if (state[key] == true) arr.push(key);
-      }
-    }
-    return arr;
-  };
-
   const handleCallbacks = () => {
     setFormDataCallback({
       name: nameRef.current?.value,
       email: emailRef.current?.value,
       phone: phoneRef.current?.value,
       branch: branchRef.current?.value,
-      positions: positionStateToArray(),
+      positions: positions,
     });
     handleChangeCallback(1);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const { Coordinator, CreativeTeam, TechnicalTeam } = state;
-
   const positionPrefError = () => {
-    return (
-      [Coordinator, CreativeTeam, TechnicalTeam].filter((v) => v).length < 2
-    );
+    return positions.filter((v) => v).length < 2;
   };
 
   return (
@@ -230,51 +189,11 @@ const DetailsForm = ({
             </Button>
           </ButtonGroup>
         </FormControl>
-        <FormControl
-          required
-          error={positionError}
-          component="fieldset"
-          sx={{ m: 3 }}
-          variant="standard"
-        >
-          <FormLabel component="legend">Position Preference</FormLabel>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={Coordinator}
-                  onChange={handleChange}
-                  name="Coordinator"
-                />
-              }
-              label="Coordinator"
-              style={{ color: theme.palette.text.primary }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={CreativeTeam}
-                  onChange={handleChange}
-                  name="CreativeTeam"
-                />
-              }
-              label="Creative Team"
-              style={{ color: theme.palette.text.primary }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={TechnicalTeam}
-                  onChange={handleChange}
-                  name="TechnicalTeam"
-                />
-              }
-              label="Technical Team"
-              style={{ color: theme.palette.text.primary }}
-            />
-          </FormGroup>
-          <FormHelperText>Select At Least 2</FormHelperText>
-        </FormControl>
+        <PositionPrefrenceSy
+          formData={formData}
+          positionError={positionError}
+          setPositions={setPositions}
+        />
       </div>
       <Box sx={{ float: "right" }}>
         <Button onClick={() => checkAndNext()} variant="contained">
