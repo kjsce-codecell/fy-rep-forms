@@ -1,18 +1,3 @@
-// import {
-//   getFirestore,
-//   collection,
-//   addDoc,
-//   getDoc,
-//   where,
-//   query,
-//   getDocs,
-// } from "firebase/firestore";
-// import "firebase/firestore";
-
-// import { initializeApp } from "firebase/app";
-// import { firebaseConfig } from "../config/firebase.config";
-// const firebaseApp = initializeApp(firebaseConfig);
-
 export const POST = async (motivation: string, object?: any) => {
   var branch = object.branch;
   var email = object.email;
@@ -50,36 +35,6 @@ export const POST = async (motivation: string, object?: any) => {
     url,
   };
 
-  // console.log("q1: ", q1);
-
-  // return "Yayay";
-
-  // const db = getFirestore();
-  // // const responseRef = db.collection("responses_21-22");
-
-  // // await responseRef.add(allData);
-  // console.log({ db, firebaseApp });
-
-  // try {
-  //   const q = query(
-  //     collection(db, "responses_21-22"),
-  //     where("email", "==", allData.email)
-  //   );
-
-  //   const querySnapshot = await getDocs(q);
-
-  //   if (querySnapshot.empty) {
-  //     const docRef = await addDoc(collection(db, "responses_21-22"), allData);
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } else {
-  //     console.log("baaar baar mat kar");
-  //     return "email-exists";
-  //   }
-  // } catch (e) {
-  //   console.error("Error adding document: ", e);
-  //   return "failed!";
-  // }
-
   return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
     method: "POST",
   }).then((res) => {
@@ -105,6 +60,8 @@ export const POST = async (motivation: string, object?: any) => {
             return "email-exists";
           } else if (res2.status === 200) {
             return "Yayay";
+          } else {
+            return "failed!";
           }
         })
         .catch((err) => {
