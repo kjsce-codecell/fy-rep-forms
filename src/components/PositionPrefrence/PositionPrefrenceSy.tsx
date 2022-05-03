@@ -32,7 +32,7 @@ const PositionPrefrenceSy = ({
         CreativeTeam: formData?.positions?.includes("CreativeTeam")
           ? true
           : false,
-        Coordinator: formData?.positions?.includes("Coordinator")
+        MarketingTeam: formData?.positions?.includes("MarketingTeam")
           ? true
           : false,
       };
@@ -40,7 +40,7 @@ const PositionPrefrenceSy = ({
       return {
         TechnicalTeam: false,
         CreativeTeam: false,
-        Coordinator: false,
+        MarketingTeam: false,
       };
     }
   };
@@ -68,7 +68,7 @@ const PositionPrefrenceSy = ({
     });
   };
 
-  const { Coordinator, CreativeTeam, TechnicalTeam } = state;
+  const { MarketingTeam, CreativeTeam, TechnicalTeam } = state;
 
   return (
     <FormControl
@@ -83,12 +83,12 @@ const PositionPrefrenceSy = ({
         <FormControlLabel
           control={
             <Checkbox
-              checked={Coordinator}
+              checked={MarketingTeam}
               onChange={handleChange}
-              name="Coordinator"
+              name="MarketingTeam"
             />
           }
-          label="Coordinator"
+          label="Marketing Team"
           style={{ color: theme.palette.text.primary }}
         />
         <FormControlLabel
