@@ -2,16 +2,11 @@ import {
   TextField,
   Box,
   Autocomplete,
-  Checkbox,
   FormControl,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
   FormLabel,
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { useTheme } from "@mui/system";
 import React, { useRef, useState } from "react";
 import { FormDataType } from "../types/FormData";
 import PositionPrefrenceSy from "./PositionPrefrence/PositionPrefrenceSy";
@@ -30,7 +25,6 @@ const DetailsForm = ({
   setFormDataCallback,
   formData,
 }: Props) => {
-  console.log(formData?.year || "SY");
   const [nameError, setNameError] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
@@ -60,8 +54,6 @@ const DetailsForm = ({
   }
 
   const checkAndNext = () => {
-    console.log(positions);
-
     let errorCount = 0;
     if (nameRef.current!.value.length < 2 || isNumber(nameRef.current!.value)) {
       setNameError(true);
