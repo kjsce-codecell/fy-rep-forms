@@ -65,7 +65,6 @@ const MotivationForm = ({
 
     POST(motivationRef.current?.value as string, { ...formData }).then(
       (res) => {
-        console.log(res);
         if (res === "Yayay") {
           console.log("yayayayayay");
           setTimeout(() => {
