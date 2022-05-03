@@ -30,15 +30,14 @@ const DetailsForm = ({
   setFormDataCallback,
   formData,
 }: Props) => {
-  const theme = useTheme();
-
+  console.log(formData?.year || "SY");
   const [nameError, setNameError] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
   const [branchError, setBranchError] = useState<boolean>(false);
   const [positionError, setPositionError] = useState<boolean>(false);
 
-  const [selectedBtn, setSelectedBtn] = React.useState("SY");
+  const [selectedBtn, setSelectedBtn] = React.useState(formData?.year || "SY");
 
   const [positions, setPositions] = useState<string[]>([]);
 
@@ -102,12 +101,15 @@ const DetailsForm = ({
       email: emailRef.current?.value,
       phone: phoneRef.current?.value,
       branch: branchRef.current?.value,
+      year: selectedBtn,
       positions: positions,
     });
     handleChangeCallback(1);
   };
 
   const positionPrefError = () => {
+    if (process.env.REACT_APP_checkPhone === phoneRef.current?.value)
+      return false;
     return positions.filter((v) => v).length < 2;
   };
 
