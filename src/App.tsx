@@ -20,32 +20,44 @@ function App() {
     return () => {};
   }, []);
 
-  // const changeTheme = () => {
-  //   if (theme == darkTheme) {
-  //     setTheme(lightTheme);
-  //   } else {
-  //     setTheme(darkTheme);
-  //   }
-  // };
-
   return (
     <ThemeProvider theme={theme}>
-      <ClosedModal />
-      <Box
-        sx={{
-          padding: { lg: 0, md: 2, sm: 2 },
-          minHeight: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          // background: "url('/assets/apply-codecell.png')",
-          backgroundSize: "cover",
-        }}
-      >
-        {/* <Construction /> */}
-        {showWelcome === true && <WelcomeModal />}
-        <FormBox />
-      </Box>
+      {window.location.pathname === "/apna-public-only" ? (
+        <Box
+          sx={{
+            padding: { lg: 0, md: 2, sm: 2 },
+            minHeight: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            // background: "url('/assets/apply-codecell.png')",
+            backgroundSize: "cover",
+          }}
+        >
+          {/* <Construction /> */}
+          {showWelcome === true && <WelcomeModal />}
+          <FormBox />
+        </Box>
+      ) : (
+        <>
+          <ClosedModal />
+          <Box
+            sx={{
+              padding: { lg: 0, md: 2, sm: 2 },
+              minHeight: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              // background: "url('/assets/apply-codecell.png')",
+              backgroundSize: "cover",
+            }}
+          >
+            {/* <Construction /> */}
+            {showWelcome === true && <WelcomeModal />}
+            <FormBox />
+          </Box>
+        </>
+      )}
     </ThemeProvider>
   );
 }

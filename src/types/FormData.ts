@@ -2,7 +2,7 @@ export interface FormDataType {
   email?: string;
   name?: string;
   phone?: string;
-  year?: number;
+  year?: string;
   branch?: "COMPS" | "IT" | "Electronics" | "EXTC" | "MECH";
   positions?: string[];
   resume?: string;
