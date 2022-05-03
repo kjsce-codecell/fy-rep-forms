@@ -98,7 +98,7 @@ const FormBox = (props: Props) => {
           alt="KJSCE CodeCell"
         />
         <Typography style={{ fontSize: 24, marginBlock: 10 }}>
-          Application for FY Reps 2021-22
+          Council Application For The Year 2022-23
         </Typography>
       </Box>
       <Stack sx={{ width: "100%", mb: 3 }} spacing={4}>
