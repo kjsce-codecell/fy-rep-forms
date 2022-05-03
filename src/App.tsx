@@ -20,9 +20,12 @@ function App() {
     return () => {};
   }, []);
 
+  const params = new URL(window.location.href).searchParams;
+  const apnaPublicHai = params.get("apna_public_hai");
+
   return (
     <ThemeProvider theme={theme}>
-      {window.location.pathname === "/apna-public-only" ? (
+      {apnaPublicHai === "haa" ? (
         <Box
           sx={{
             padding: { lg: 0, md: 2, sm: 2 },
