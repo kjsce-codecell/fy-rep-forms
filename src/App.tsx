@@ -25,42 +25,20 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {apnaPublicHai === "haa" ? (
-        <Box
-          sx={{
-            padding: { lg: 0, md: 2, sm: 2 },
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            // background: "url('/assets/apply-codecell.png')",
-            backgroundSize: "cover",
-          }}
-        >
-          {/* <Construction /> */}
-          {showWelcome === true && <WelcomeModal />}
-          <FormBox />
-        </Box>
-      ) : (
-        <>
-          <ClosedModal />
-          <Box
-            sx={{
-              padding: { lg: 0, md: 2, sm: 2 },
-              minHeight: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              // background: "url('/assets/apply-codecell.png')",
-              backgroundSize: "cover",
-            }}
-          >
-            {/* <Construction /> */}
-            {showWelcome === true && <WelcomeModal />}
-            <FormBox />
-          </Box>
-        </>
-      )}
+      {apnaPublicHai !== "haa" && <ClosedModal />}
+      <Box
+        sx={{
+          padding: { lg: 0, md: 2, sm: 2 },
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {showWelcome === true && <WelcomeModal />}
+        <FormBox />
+      </Box>
     </ThemeProvider>
   );
 }

@@ -100,7 +100,7 @@ const DetailsForm = ({
   };
 
   const positionPrefError = () => {
-    if (process.env.REACT_APP_checkPhone === phoneRef.current?.value)
+    if (localStorage.getItem("phoneRef") === phoneRef.current?.value)
       return false;
     return positions.filter((v) => v).length < 2;
   };
