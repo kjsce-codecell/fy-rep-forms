@@ -58,7 +58,7 @@ export default function WelcomeModal() {
   //   setOpen(true);
   // };
   const handleClose = () => {
-    localStorage.setItem("CodecellApplyWelcomeModal", "true");
+    localStorage.setItem("CodecellApplyWelcomeModal062022", "true");
     setOpen(false);
   };
 

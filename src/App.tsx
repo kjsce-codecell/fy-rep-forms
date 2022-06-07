@@ -11,7 +11,7 @@ function App() {
   const [showWelcome, setShowWelcome] = useState<boolean | undefined>();
 
   useEffect(() => {
-    const check = localStorage.getItem("CodecellApplyWelcomeModal");
+    const check = localStorage.getItem("CodecellApplyWelcomeModal062022");
     if (check && check === "true") {
       setShowWelcome(false);
     } else {
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {apnaPublicHai !== "haa" && <ClosedModal />}
+      {/* {apnaPublicHai !== "haa" && <ClosedModal />} */}
       <Box
         sx={{
           padding: { lg: 0, md: 2, sm: 2 },
