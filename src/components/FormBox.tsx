@@ -25,7 +25,7 @@ const FormBox = (props: Props) => {
   };
 
   useEffect(() => {
-    const lsData = localStorage.getItem("CodecellApplyFormData");
+    const lsData = localStorage.getItem("CodecellApplyFormData062022");
     if (lsData) {
       setFormData(JSON.parse(lsData));
       const dataLength = calculateDataLength(JSON.parse(lsData));
@@ -43,7 +43,10 @@ const FormBox = (props: Props) => {
 
   useEffect(() => {
     if (formData != undefined) {
-      localStorage.setItem("CodecellApplyFormData", JSON.stringify(formData));
+      localStorage.setItem(
+        "CodecellApplyFormData062022",
+        JSON.stringify(formData)
+      );
     }
 
     return () => {};
