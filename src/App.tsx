@@ -3,8 +3,6 @@ import { Box, ThemeProvider } from "@mui/material";
 import FormBox from "./components/FormBox";
 import { lightTheme } from "./theme/theme";
 import WelcomeModal from "./components/WelcomeModal";
-import Construction from "./components/Construction";
-import ClosedModal from "./components/ClosedModal";
 
 function App() {
   const [theme] = useState(lightTheme);

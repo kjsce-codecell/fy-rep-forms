@@ -1,3 +1,6 @@
+import { addDoc, collection } from "firebase/firestore";
+import { database } from "../config/firebase";
+
 export const POST = async (motivation: string, object?: any) => {
   var branch = object.branch;
   var email = object.email;
@@ -35,7 +38,9 @@ export const POST = async (motivation: string, object?: any) => {
     url,
   };
 
-  return fetch("https://cors-fix.nishit.workers.dev/?" + url, {
+  await addDoc(collection(database, "responses-june-2022"), allData);
+
+  await fetch("https://cors-fix.nishit.workers.dev/?" + url, {
     method: "POST",
   }).then((res) => {
     if (res.status == 200) {
@@ -73,4 +78,6 @@ export const POST = async (motivation: string, object?: any) => {
       return "failed!";
     }
   });
+
+  return "Yayay";
 };
