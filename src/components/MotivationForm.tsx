@@ -19,7 +19,6 @@ import successAnimationData from "../animations/party.json";
 import errorAnimationData from "../animations/error.json";
 import loadingAnimationData from "../animations/loading.json";
 import InfoIcon from "@mui/icons-material/Info";
-import firebase from "firebase/compat/app";
 
 interface Props {
   handleChangeCallback(index: number): void;

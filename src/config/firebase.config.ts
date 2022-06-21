@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyDNt15j_oyl_P1ciIz0AoyBAWB1wbC3b3o",
-  authDomain: "codecell-interview-post-trauma.firebaseapp.com",
-  projectId: "codecell-interview-post-trauma",
-  storageBucket: "codecell-interview-post-trauma.appspot.com",
-  messagingSenderId: "1073658133470",
-  appId: "1:1073658133470:web:d63ccf17ebbad33509bb4f",
+  apiKey: "AIzaSyAa69L1s3GCAOVO1Sjw-alwYaI2KWxoSnU",
+  authDomain: "codecell-interviews-jun-2022.firebaseapp.com",
+  projectId: "codecell-interviews-jun-2022",
+  storageBucket: "codecell-interviews-jun-2022.appspot.com",
+  messagingSenderId: "459578713655",
+  appId: "1:459578713655:web:b2442b347e7afad188c1b2",
 };
