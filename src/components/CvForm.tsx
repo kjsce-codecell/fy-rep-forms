@@ -1,5 +1,6 @@
-import { TextField, Box, Button } from "@mui/material";
+import { TextField, Box, Button, SxProps } from "@mui/material";
 import React, { useRef, useState } from "react";
+import useWindowDimensions from "../hooks/useWindowDimentions";
 import { FormDataType } from "../types/FormData";
 
 interface Props {
@@ -13,6 +14,8 @@ const CvForm = ({
   setFormDataCallback,
   formData,
 }: Props) => {
+  const { width } = useWindowDimensions();
+
   const resumeRef = useRef<HTMLInputElement>(null);
   const coverRef = useRef<HTMLInputElement>(null);
   const linkedInRef = useRef<HTMLInputElement>(null);
@@ -146,6 +149,24 @@ const CvForm = ({
           required
         />
       </div>
+      <Box
+        sx={
+          width < 900
+            ? { ...downloadCoverLetterBtn, width: "100%" }
+            : { ...downloadCoverLetterBtn }
+        }
+      >
+        <a
+          href="/assets/CoverLetter_KJSCECodecell_21-22.pdf"
+          attributes-list
+          download="CoverLetter_KJSCECodecell_21-22"
+          style={noAStyle}
+        >
+          <Button fullWidth={width < 900 ? true : false} variant="outlined">
+            Sample Cover Letter
+          </Button>
+        </a>
+      </Box>
       <Box sx={{ float: "right", mt: 3 }}>
         <Button onClick={() => handleCallbacks(0)} style={{ marginRight: 10 }}>
           Previous
@@ -156,6 +177,17 @@ const CvForm = ({
       </Box>
     </Box>
   );
+};
+
+const noAStyle: React.CSSProperties = {
+  color: "inherit",
+  textDecoration: "inherit",
+  cursor: "inherit",
+};
+const downloadCoverLetterBtn: SxProps = {
+  float: "left",
+  mt: 3,
+  ml: 1.5,
 };
 
 export default CvForm;
