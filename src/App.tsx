@@ -24,7 +24,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* {apnaPublicHai !== "haa" && <ClosedModal />} */}
+      {apnaPublicHai !== "haa" && <ClosedModal />}
       <Box
         sx={{
           padding: { lg: 0, md: 2, sm: 2 },
