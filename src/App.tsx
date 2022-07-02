@@ -3,6 +3,7 @@ import { Box, ThemeProvider } from "@mui/material";
 import FormBox from "./components/FormBox";
 import { lightTheme } from "./theme/theme";
 import WelcomeModal from "./components/WelcomeModal";
+import ClosedModal from "./components/ClosedModal";
 
 function App() {
   const [theme] = useState(lightTheme);
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* {apnaPublicHai !== "haa" && <ClosedModal />} */}
+      {apnaPublicHai !== "haa" && <ClosedModal />}
       <Box
         sx={{
           padding: { lg: 0, md: 2, sm: 2 },
